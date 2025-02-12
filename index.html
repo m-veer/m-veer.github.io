@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Loading Screen</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #111;
+            color: white;
+            overflow: hidden;
+        }
+
+        .loading-screen {
+            background-color: #111;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            z-index: 1000;
+            transition: transform 1s ease-in-out;
+        }
+
+        .greeting-container {
+            text-align: center;
+            opacity: 0;
+            /* transform: translateY(20px); */
+            /* transition: opacity 0.5s ease, transform 0.5s ease; */
+        }
+
+        .greeting-text {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            white-space: nowrap;
+        }
+
+        .main-content {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-screen">
+        <div class="greeting-container">
+            <div class="greeting-text"></div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <!-- Your portfolio content goes here -->
+        <h1>Welcome to My Portfolio</h1>
+    </div>
+
+    <script>
+        const greetings = [
+            { text: "Hello", language: "English" },
+            { text: "नमस्कार", language: "Marathi" },
+            { text: "नमस्ते", language: "Hindi" },
+            { text: "السلام عليكم", language: "Arabic" },
+            { text: "Bonjour", language: "French" },
+            { text: "こんにちは", language: "Japanese" },
+            { text: "Hola", language: "Spanish" },
+            { text: "Ciao", language: "Italian" },
+            { text: "你好", language: "Chinese" },
+            { text: "안녕하세요", language: "Korean" }
+        ];
+
+        const greetingContainer = document.querySelector('.greeting-container');
+        const greetingText = document.querySelector('.greeting-text');
+        let currentIndex = 0;
+
+        function showGreeting() {
+            greetingContainer.classList.remove('fade-in');
+            
+            setTimeout(() => {
+                greetingText.innerHTML = `${greetings[currentIndex].text} 👋`;
+                greetingContainer.classList.add('fade-in');
+                
+                currentIndex++;
+                
+                if (currentIndex < greetings.length) {
+                    setTimeout(showGreeting, 100);
+                } else {
+                    setTimeout(finishLoading, 100);
+                }
+            }, 500);
+        }
+
+        function finishLoading() {
+            const loadingScreen = document.querySelector('.loading-screen');
+            const mainContent = document.querySelector('.main-content');
+            
+            loadingScreen.style.transform = 'translateY(-100%)';
+            mainContent.style.opacity = '1';
+        }
+
+        // Start the animation when page loads
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                greetingContainer.style.opacity = '1';
+                showGreeting();
+            }, 500);
+        });
+    </script>
+</body>
+</html>
