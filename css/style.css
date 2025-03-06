@@ -58,9 +58,9 @@
   body.is--loading .section.cover {
     display: grid;
   }
-  body.is--loading .section.work .hero-image figure {
+  /* body.is--loading .section.work .hero-image figure {
     visibility: hidden;
-  }
+  } */
   body.cover--is--visible .app-main {
     transform: translateY(115vh);
   }
@@ -608,60 +608,63 @@
     display: inline-block;
     line-height: 0.88;
   }
-  
-  
+
   /* Section work
   ----------------------------------------------------------------------------- */
-  
-  .section.work {
-    padding: 0;
-    display: flex;
-  }
   .section.work > .content {
-    padding: 50vh 0 20px 0;
+    padding: 220px 0 20px 0;
+    display: grid;
+    grid-template-columns: var(--grid--app-columns-2);
+    gap: var(--grid--app-gutter);
   }
-  .section.work .hero-image figure {
-    position: relative;
-  
-    -webkit-mask-image: url("../assets/work/Billy-Sweeney-work-collage-shape.svg");
-    -webkit-mask-size: contain;
-    -webkit-mask-position: center;
-    -webkit-mask-repeat: no-repeat;
-  
-    mask-image: url("../assets/work/Billy-Sweeney-work-collage-shape.svg");
-    mask-size: contain;
-    mask-position: center;
-    mask-repeat: no-repeat;
+  .section.work .item {
+    padding-top: 80px;
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: var(--grid--app-columns-2);
+    column-gap: var(--grid--app-gutter);
   }
-  .section.work .hero-image .image {
-    width: 100vw;
-    padding-bottom: 205.556%;
-  
-    background-image: url("../assets/work/Billy-Sweeney-work-collage-1440.jpg");
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
+  .section.work .item .logo {
+    grid-column: 1 / -1;
+    width: 96px;
+    height: 96px;
+    border-radius: 48px;
+    margin-left: -8px;
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: center;
+    background-color: var(--color--foreground--5);
   }
-  @media all and (min-width: 1000px) {
-    .section.work .hero-image .image {
-      background-image: url("../assets/work/Billy-Sweeney-work-collage-2880.jpg");
-    }
+  .section.work .item .logo .content {
+    display: flex;
+    align-items: center;
   }
-  @media all and (min-width: 2000px) {
-    .section.work .hero-image .image {
-      background-image: url("../assets/work/Billy-Sweeney-work-collage-5760.jpg");
-    }
+  .section.work .item .logo .content svg path {
+    fill: var(--color--foreground--100);
   }
-  .section.work .hero-image .image-overlay-01,
-  .section.work .hero-image .image-overlay-02 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+  .section.work .item .company {
+    grid-column: 1 / -1;
   }
-  
-  
+  .section.work .item .role {
+    grid-column: 1 / -1;
+    padding-top: 0.1em;
+    padding-bottom: 0.1em;
+  }
+  .section.work .item .metadata {
+    grid-column: 1 / -1;
+    padding-top: 10px;
+  }
+  .section.work .item .time {
+    padding-right: 0.3em;
+  }
+  .section.work .item .location {
+  }
+  .section.work .item .description {
+    padding-top: 10px;
+    grid-column: 1 / 2;
+    color: var(--color--foreground--50);
+  }
+
   /* Section values
   ----------------------------------------------------------------------------- */
   

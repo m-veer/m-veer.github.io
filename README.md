@@ -20,5 +20,5 @@ Work (Projects) -> render all the projects that I've worked online
 Values -> core values
 Background (Experience) -> my experience
 References -> recommendations
-About -> replace this with skills
+About -> replace this with skills, and certifications
 Contact -> already updated

@@ -552,48 +552,28 @@ $(window).on('load resize scroll', function() {
   var sectionContactMiddle = sectionContactTop + sectionContactHeightHalf;
   var sectionContactBottom = sectionContactTop + sectionContactHeight;
 
-  // console.log('————————');
-  // console.log('viewport height = ' + viewportHeight);
-  // console.log('viewport height half = ' + viewportHeightHalf);
-  // console.log('viewport height third = ' + viewportHeightThird);
-  // console.log('viewport height quarter = ' + viewportHeightQuarter);
-  // console.log('—');
-  // console.log('.app-main height = ' + appMainHeight);
-  // console.log('.app-main scroll top = ' + appMainScrollTop);
-  // console.log('.app-main scroll middle = ' + appMainScrollMiddle);
-  // console.log('.app-main scroll bottom = ' + appMainScrollBottom);
-  // console.log('.app-main scroll down remaining = ' + appMainScrollDownRemaining);
-
   appNavItem.removeClass('is--active');
-  // section.removeClass('is--in-view');
 
   if ( sectionIntroMiddle > appMainScrollTop ){
     appNavItemIntro.addClass('is--active');
-    // sectionIntro.addClass('is--in-view');
   }
   else if ( sectionWorkTop <= appMainScrollBottom && sectionWorkBottom >= appMainScrollMiddle ){
     appNavItemWork.addClass('is--active');
-    // sectionWork.addClass('is--in-view');
   }
   if ( sectionValuesTop <= appMainScrollMiddle && sectionValuesBottom >= appMainScrollMiddle ){
     appNavItemValues.addClass('is--active');
-    // sectionValues.addClass('is--in-view');
   }
   if ( sectionBackgroundTop <= appMainScrollMiddle && sectionBackgroundBottom >= appMainScrollMiddle ){
     appNavItemBackground.addClass('is--active');
-    // sectionBackground.addClass('is--in-view');
   }
   if ( sectionReferencesTop <= appMainScrollMiddle && sectionReferencesBottom >= appMainScrollMiddle ){
     appNavItemReferences.addClass('is--active');
-    // sectionReferences.addClass('is--in-view');
   }
   if ( sectionAboutTop <= appMainScrollMiddle && sectionContactMiddle >= appMainScrollBottom ){
     appNavItemAbout.addClass('is--active');
-    // sectionAbout.addClass('is--in-view');
   }
   if ( sectionContactMiddle < appMainScrollBottom ){
     appNavItemContact.addClass('is--active');
-    // sectionContact.addClass('is--in-view');
   }
 
 }); // End app main scroll

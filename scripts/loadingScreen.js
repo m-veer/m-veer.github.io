@@ -10,6 +10,7 @@ const greetings = [
   { text: "你好，世界", language: "Chinese", countryCode: "cn" },
   { text: "안녕하세요 세계", language: "Korean", countryCode: "kr" }
 ];
+
 // const greetings = [
 //   { text: "Hello World", language: "English", flag: "🇬🇧" },
 //   { text: "नमस्ते दुनिया", language: "Hindi", flag: "🇮🇳" },
