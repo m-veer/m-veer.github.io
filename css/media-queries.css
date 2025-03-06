@@ -178,12 +178,16 @@
   .section.values > .content,
   .section.background > .content,
   .section.background .item,
+  /* .section.work > .content, */
+  /* .section.work .item, */
   .section.references > .content,
   .section.about > .content {
     grid-template-columns: var(--grid--app-columns);
   }
   .section.background .description,
   .section.background .item .description,
+  /* .section.work .description, */
+  /* .section.work .item .description, */
   .section.references .item {
     grid-column: 1 / 3;
   }
@@ -193,9 +197,8 @@
   .section.references .quote {
     padding-right: 0;
   }
-  .section.about .awards,
-  .section.about .press,
-  .section.about .colophon {
+  .section.about .skills,
+  .section.about .certifications {
     grid-column: 1 / -1;
   }
   .section.contact > .content {
