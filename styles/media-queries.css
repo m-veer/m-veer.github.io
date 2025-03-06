@@ -193,9 +193,8 @@
   .section.references .quote {
     padding-right: 0;
   }
-  .section.about .awards,
-  .section.about .press,
-  .section.about .colophon {
+  .section.about .skills,
+  .section.about .certifications {
     grid-column: 1 / -1;
   }
   .section.contact > .content {
