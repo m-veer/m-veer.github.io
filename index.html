@@ -18,15 +18,15 @@
 
   <link rel="shortcut icon" type="image/x-icon" href="assets/app/favicon-32x32.png">
 
-  <link rel="stylesheet" href="styles/normalize-8.0.1.css">
-  <link rel="stylesheet" href="styles/reset.css">
-  <link rel="stylesheet" href="styles/font.css">
-  <link rel="stylesheet" href="styles/variables.css">
-  <link rel="stylesheet" href="styles/color.css">
-  <link rel="stylesheet" href="styles/style.css">
-  <link rel="stylesheet" href="styles/grid.css">
-  <link rel="stylesheet" href="styles/media-queries.css">
-  <link rel="stylesheet" href="styles/loading-screen.css">
+  <link rel="stylesheet" href="css/normalize-8.0.1.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/font.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/color.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/grid.css">
+  <link rel="stylesheet" href="css/media-queries.css">
+  <link rel="stylesheet" href="css/loading-screen.css">
 
   <script src="scripts/modernizer.js"></script>
   <script src="scripts/jquery-3.7.1.min.js"></script>
@@ -80,7 +80,6 @@
     </div>
   </nav>
 
-  <!-- <main class="app-main main-content"> -->
   <main class="app-main main-content">
     <section class="section intro">
       <div class="content">
@@ -103,15 +102,61 @@
     </section>
 
     <section class="section work">
-      <!-- <div class="content">
-        <div class="hero-image">
-          <figure>
-            <div class="image"></div>
-            <div class="image-overlay-01"></div>
-            <div class="image-overlay-02"></div>
-          </figure>
+      <div class="content">
+        <div class="item">
+          <h2 class="company">Academic</h2>
+          <h1 class="role">HealthCare API Cloud Integration</h1>
+          <p class="metadata">
+            <span class="location">Technology Stack: Terraform, Shell, Packer, AWS, GCP, Python, PostgreSQL, GitHub Actions</span>
+          </p>
+          <p class="description">Developed a cloud-based Health API system utilizing Python and PostgreSQL to enhance data security and efficiency for healthcare applications, while also automating cloud infrastructure provisioning through Terraform configurations for subnets, which streamlined deployment on AWS and GCP. Additionally, improved CI/CD reliability by implementing GitHub Actions pipelines with YAML, automating API testing using shell scripts, validating Packer files, and provisioning cloud instances.</p>
         </div>
-      </div> -->
+
+        <div class="item">
+          <h2 class="company">Solo</h2>
+          <h1 class="role">Netflix Clone</h1>
+          <p class="metadata">
+            <span class="location">Technology Stack: JavaScript, MongoDB, ExpressJS, ReactJS, NodeJS, HTML, CSS</span>
+          </p>
+          <p class="description">Netflix Clone is a comprehensive entertainment platform built using a modern tech stack including React.js, Node.js, Express.js, MongoDB, and Tailwind CSS. It offers secure user authentication through JWT, ensuring a personalized experience. The responsive UI allows users to browse and search for movies, TV shows, and actors, watch trailers, and discover similar content. The app also features a search history function and an engaging landing page. With its combination of robust backend functionality and sleek frontend design, this application provides a seamless and feature-rich experience for movie and TV enthusiasts.</p>
+        </div>
+
+        <div class="item">
+          <h2 class="company">Academic</h2>
+          <h1 class="role">Eventify</h1>
+          <p class="metadata">
+            <span class="location">Technology Stack: TypeScript, MongoDB, Express, React, NodeJS, HTML, SCSS, Git</span>
+          </p>
+          <p class="description">Developed a full-stack event management platform, Eventify, featuring React Redux for efficient state management, PWA for offline functionality, and internationalization to support multiple languages, delivering an enhanced user experience. Integrated Stripe for secure payments, Google Maps for location-based event discovery, and a QR code scanner for streamlined check-ins, optimizing transaction efficiency and attendee management. Additionally, implemented real-time chat functionality using Fugu API to enable instant communication between event organizers and attendees, boosting user engagement and support.</p>
+        </div>
+
+        <div class="item">
+          <h2 class="company">Solo</h2>
+          <h1 class="role">Comic Downloader</h1>
+          <p class="metadata">
+            <span class="location">Technology Stack: JavaScript, React, FastAPI, Sqlite3, OS, requests, BeautifulSoup, Git</span>
+          </p>
+          <p class="description">Developed a high-performance comic retrieval application that allows users to fetch comic information via URL or text, select issues, and download images to a local directory or generate PDFs, processing over 10 comics in under a minute. The backend, built with Python and APIs and deployed using Uvicorn, seamlessly integrates with a ReactJS frontend, providing a smooth user experience for more than 100 daily active users. The application also features offline reading capabilities, storing comic names and page numbers to enable users to resume reading from their last position, enhancing overall user engagement and convenience.</p>
+        </div>
+
+        <div class="item">
+          <h2 class="company">Academic</h2>
+          <h1 class="role">Stock Market Prediction</h1>
+          <p class="metadata">
+            <span class="location">Technology Stack: Pandas, NumPy, Seaborn, Sklearn, TensorFlow, Dash, Word Cloud</span>
+          </p>
+          <p class="description">Developed a comprehensive machine learning project focusing on sentiment analysis and predictive modeling. The project analyzed 10,000 Amazon customer reviews to determine sentiment polarity, identifying the top 50 most-reviewed products and boosting user engagement by 20%. It also conducted sentiment analysis on 5,000 IMDB movie reviews, comparing various model performances with accuracy rates ranging from 78% to 85%. Additionally, the project utilized LSTM models to predict stock market movements based on sentiment analysis of 1 million news headlines and stock data, achieving a remarkable 90% predictive accuracy that can be applied to unseen tabular data.</p>
+        </div>
+
+        <div class="item">
+          <h2 class="company">Solo</h2>
+          <h1 class="role">Todo Application</h1>
+          <p class="metadata">
+            <span class="location">Technology Stack: TypeScript, MongoDB, ExpressJS, ReactJS, NodeJS, ViteJS, TailWindCSS, Git</span>
+          </p>
+          <p class="description">Todo Application leverages a modern technology stack to deliver a seamless and efficient task management experience. Built with TypeScript for enhanced code reliability, it utilizes MongoDB for flexible data storage, ExpressJS and NodeJS for robust backend operations, and ReactJS with ViteJS for a responsive frontend. The application's sleek interface is styled using TailWindCSS, ensuring a visually appealing and user-friendly design. With Git for version control, this project showcases a comprehensive approach to full-stack development, offering users a powerful tool to organize, track, and complete their tasks with ease.</p>
+        </div>
+      </div>
     </section>
 
     <section class="section values">
@@ -146,45 +191,6 @@
 
         <div class="item">
           <div class="logo">
-            <!-- <div class="content">
-              <svg class="icon figma" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
-                <path d="M43.92475 26.53085c2.17871-1.55361 3.60659-4.09521 3.60659-6.96915 0-4.72129-3.8409-8.56171-8.56219-8.56171H25.03086c-4.72129 0-8.56219 3.84042-8.56219 8.56171 0 2.87393 1.42788 5.41554 3.60659 6.96915-2.17871 1.55361-3.60659 4.09521-3.60659 6.96915s1.42788 5.41554 3.60659 6.96915c-2.17871 1.55361-3.60659 4.09521-3.60659 6.96915 0 4.72129 3.84091 8.56171 8.56219 8.56171s8.56219-3.84042 8.56219-8.56171v-7.28374c1.47097 1.19053 3.34062 1.90715 5.3761 1.90715 4.72129 0 8.56219-3.84042 8.56219-8.56171 0-2.87393-1.42789-5.41554-3.60659-6.96915zM33.59304 14.18512h5.3761c2.96442 0 5.3761 2.41217 5.3761 5.37659s-2.41169 5.37659-5.3761 5.37659h-5.3761V14.18512zm-13.93829 5.37659c0-2.96442 2.41169-5.37659 5.3761-5.37659h5.3761V24.9383h-5.3761c-2.96441-.00001-5.3761-2.41218-5.3761-5.37659zm0 13.93829c0-2.96441 2.41169-5.37659 5.3761-5.37659h5.3761v10.75318h-5.3761c-2.96441 0-5.3761-2.41217-5.3761-5.37659zm10.75221 13.93829c0 2.96442-2.41169 5.37659-5.3761 5.37659s-5.3761-2.41217-5.3761-5.37659 2.41169-5.37659 5.3761-5.37659h5.3761v5.37659zm8.56219-8.5617c-2.96442 0-5.3761-2.41217-5.3761-5.37659s2.41169-5.37659 5.3761-5.37659 5.3761 2.41217 5.3761 5.37659-2.41169 5.37659-5.3761 5.37659z"/>
-              </svg>
-            </div> -->
-            <!-- <div class="content"> -->
-              <!-- <img src="assets/logos/EY.png" alt="EY logo" class="icon figma" width="64" height="64"> -->
-              <!-- <a href="https://iconscout.com/icons/ernst" class="text-underline font-size-sm" target="_blank">Ernst</a> by <a href="https://iconscout.com/contributors/icon-mafia" class="text-underline font-size-sm">Icon Mafia</a> on <a href="https://iconscout.com" class="text-underline font-size-sm">IconScout</a> -->
-            <!-- </div> -->
-            <!-- <div class="content">
-              <img src="https://iconscout.com/free-icon/ernst" alt="Ernst Icon" class="icon ernst" width="64" height="64">
-            </div> -->
-            <!-- <div class="attribution">
-              <p class="font-size-sm">
-                Icon: <a href="https://iconscout.com/icons/ernst" class="text-underline" target="_blank">Ernst</a> by <a href="https://iconscout.com/contributors/icon-mafia" class="text-underline">Icon Mafia</a> on <a href="https://iconscout.com" class="text-underline">IconScout</a>
-              </p>
-            </div> -->
-            <!-- <div class="content">
-              <svg class="icon EY" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 69 69">
-                <path d="M0 0h69v69H0z" fill="#ffe600"/>
-                <path d="M14 14h41v41H14zm4.5 4.5h32v32h-32z" fill="#000"/>
-                <path d="M23 28h23v5H23zm0 8h23v5H23z" fill="#000"/>
-              </svg>
-            </div> -->
-            <!-- <div class="content">
-              <svg class="icon ey" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
-                <circle cx="32" cy="32" r="32" fill="#000" />
-                  <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="20" fill="#FFF">
-                    EY
-                  </text>
-              </svg>
-            </div> -->
-            <!-- <div class="content">
-              <svg class="icon ey" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
-                <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="20" fill="#FFF">
-                  EY
-                </text>
-              </svg>
-            </div> -->
             <div class="content">
               <svg class="icon ey" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
                 <circle cx="32" cy="32" r="32" fill="white" />
@@ -206,9 +212,6 @@
             <div class="content">
               <svg class="icon zinc" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
                 <circle cx="32" cy="32" r="32" fill="white" />
-                  <!-- <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="20" fill="#FFF">
-                    ZT
-                  </text> -->
                   <image href="assets/logos/ZINC.jpeg" x="9" y="9" width="47" height="47" />
               </svg>
             </div>
@@ -227,9 +230,6 @@
             <div class="content">
               <svg class="icon tsf" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
                 <circle cx="32" cy="32" r="32" fill="white" />
-                  <!-- <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="20" fill="#FFF">
-                    TSF
-                  </text> -->
                   <image href="assets/logos/TSF.png" x="9" y="9" width="47" height="47" />
               </svg>
             </div>
@@ -248,9 +248,6 @@
             <div class="content">
               <svg class="icon cipl" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
                 <circle cx="32" cy="32" r="32" fill="white" />
-                  <!-- <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" font-family="Arial, sans-serif" font-size="20" fill="#FFF">
-                    CIPL
-                  </text> -->
                   <image href="assets/logos/Cyberace.png" x="2" y="2" width="60" height="60" />
               </svg>
             </div>
@@ -286,7 +283,7 @@
         </div>
 
         <div class="item">
-          <h2 class="quote"><span class="opening-quote-mark">“</span>Mayur is a star developer.”</h2>
+          <h2 class="quote"><span class="opening-quote-mark">“</span>Mayur is a star developer!”</h2>
           <p>
             <span class="person"><a href="https://www.linkedin.com/in/tapan-bansal-a55b4752/" target="_blank">Tapan Bansal</a></span>
             <span class="role">Senior Manager | Ernst & Young</span>
