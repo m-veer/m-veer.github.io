@@ -40,36 +40,17 @@ jobs:
           echo "Contents of config.js:"
           cat config.js | sed 's/${{ secrets.API_KEY }}/[MASKED]/g' | sed 's/${{ secrets.BIN_ID }}/[MASKED]/g'
 
-      # Step 5: Check if config.js exists
-      - name: Check if config.js exists
-        uses: andstor/file-existence-action@v3
-        with:
-          files: "config.js"
-        id: check_config_js
-
-      # Step 6: Config.js exists
-      - name: Config.js exists
-        if: steps.check_config_js.outputs.files_exists == 'true'
-        run: |
-          echo "config.js exists in the root directory."
-
-      # Step 7: Debug - List Build Output
+      # Step 5: Debug - List Build Output
       - name: Debug - List Files in Final Directory
         run: |
           echo "Listing files in the final directory before deployment:"
           ls -la .
 
-      # Step 8: Upload artifact for GitHub Pages deployment
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v2
-        with:
-          path: '.' # Adjust this to your build output directory if needed
-
-      # Step 9: Deploy to GitHub Pages
+      # Step 6: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
 
-      # Step 10: Output Deployment URL (Optional)
+      # Step 7: Output Deployment URL (Optional)
       - name: Output Deployment URL
         run: echo "Deployed to ${{ steps.deployment.outputs.page_url }}"
