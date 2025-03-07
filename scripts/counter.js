@@ -60,6 +60,9 @@
 
 import { BIN_ID, API_KEY } from '../config.js';
 
+console.log(BIN_ID);
+console.log(API_KEY);
+
 async function updateCounter() {
   try {
     // Fetch current data
