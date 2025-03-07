@@ -12,11 +12,10 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pages: write
-      id-token: write
-
+    # permissions:
+    #   contents: write
+    #   pages: write
+    #   id-token: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -26,10 +25,16 @@ jobs:
           echo "Listing files in the root directory:"
           ls -la
 
+      # - name: Create config.js
+      #   run: |
+      #     echo "export const BIN_ID = '${{ secrets.BIN_ID }}';" > config.js
+      #     echo "export const API_KEY = '${{ secrets.API_KEY }}';" >> config.js
       - name: Create config.js
         run: |
           echo "export const BIN_ID = '${{ secrets.BIN_ID }}';" > config.js
           echo "export const API_KEY = '${{ secrets.API_KEY }}';" >> config.js
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
 
       - name: Debug - Check config.js
         run: |
@@ -41,33 +46,35 @@ jobs:
           echo "BIN_ID: ${{ secrets.BIN_ID }}"
           echo "API_KEY: ${{ secrets.API_KEY }}"
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
+      # - name: Setup Pages
+      #   uses: actions/configure-pages@v3
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
 
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
-        env:
-          TOKEN: ${{ secrets.TOKEN }}
+      # - name: Deploy to GitHub Pages
+      #   id: deployment
+      #   uses: actions/deploy-pages@v2
+      #   env:
+      #     TOKEN: ${{ secrets.TOKEN }}
 
+      # - name: Output deployment URL
+      #   run: echo "Deployed to ${{ steps.deployment.outputs.page_url }}"
+
+  deploy:
+    needs: build-and-deploy
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Output deployment URL
         run: echo "Deployed to ${{ steps.deployment.outputs.page_url }}"
-
-  # deploy:
-  #   needs: build-and-deploy
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     pages: write
-  #     id-token: write
-  #   environment:
-  #     name: github-pages
-  #     url: ${{ steps.deployment.outputs.page_url }}
-  #   steps:
-  #     - name: Deploy to GitHub Pages
-  #       id: deployment
-  #       uses: actions/deploy-pages@v4
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
