@@ -10,28 +10,46 @@ on:
       - closed
 
 jobs:
-  build-and-deploy:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Debug - List Files
+        run: |
+          echo "Listing files in the root directory:"
+          ls -la
+      - name: Create config.js
+        run: |
+          echo "export const BIN_ID = '${{ secrets.BIN_ID }}';" > config.js
+          echo "export const API_KEY = '${{ secrets.API_KEY }}';" >> config.js
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+      - name: Debug - Check config.js
+        run: |
+          echo "Contents of config.js:"
+          cat config.js
+      - name: Debug - Environment Variables
+        run: |
+          echo "BIN_ID: ${{ secrets.BIN_ID }}"
+          echo "API_KEY: ${{ secrets.API_KEY }}"
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+  deploy:
+    needs: build
     runs-on: ubuntu-latest
     permissions:
       contents: write
       pages: write
       id-token: write
-    
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      # Step 1: Checkout repository
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      # Step 2: Create config.js securely
-      - name: Create config.js
-        run: |
-          echo "export const BIN_ID = '${{ secrets.BIN_ID }}';" > ./config.js
-          echo "export const API_KEY = '${{ secrets.API_KEY }}';" >> ./config.js
-
-      # Step 3: Deploy to GitHub Pages
+      - name: Output deployment URL
+        run: echo "Deployed to ${{ steps.deployment.outputs.page_url }}"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
