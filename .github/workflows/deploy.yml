@@ -9,93 +9,6 @@ on:
     types:
       - closed
 
-# jobs:
-#   build-and-deploy:
-#     runs-on: ubuntu-latest
-#     # permissions:
-#     #   contents: write
-#     #   pages: write
-#     #   id-token: write
-#     steps:
-#       - name: Checkout repository
-#         uses: actions/checkout@v4
-
-#       - name: Debug - List Files
-#         run: |
-#           echo "Listing files in the root directory:"
-#           ls -la
-
-#       # - name: Create config.js
-#       #   run: |
-#       #     echo "export const BIN_ID = '${{ secrets.BIN_ID }}';" > config.js
-#       #     echo "export const API_KEY = '${{ secrets.API_KEY }}';" >> config.js
-#       - name: Create config.js
-#         run: |
-#           echo "export const BIN_ID = '${{ secrets.BIN_ID }}';" > config.js
-#           echo "export const API_KEY = '${{ secrets.API_KEY }}';" >> config.js
-#         env:
-#           API_KEY: ${{ secrets.API_KEY }}
-
-#       - name: Debug - List Files
-#         run: |
-#           echo "Listing files in the root directory:"
-#           ls -la
-
-#       - name: Debug - Check config.js
-#         run: |
-#           echo "Contents of config.js:"
-#           cat config.js
-
-#       - name: Debug - Environment Variables
-#         run: |
-#           echo "BIN_ID: ${{ secrets.BIN_ID }}"
-#           echo "API_KEY: ${{ secrets.API_KEY }}"
-
-#       # - name: Setup Pages
-#       #   uses: actions/configure-pages@v3
-
-#       - name: Upload Pages artifact
-#         uses: actions/upload-pages-artifact@v3
-#         with:
-#           path: '.'
-
-#       # - name: Deploy to GitHub Pages
-#       #   id: deployment
-#       #   uses: actions/deploy-pages@v2
-#       #   env:
-#       #     TOKEN: ${{ secrets.TOKEN }}
-
-#       # - name: Output deployment URL
-#       #   run: echo "Deployed to ${{ steps.deployment.outputs.page_url }}"
-
-#   deploy:
-#     needs: build-and-deploy
-#     runs-on: ubuntu-latest
-#     permissions:
-#       pages: write
-#       id-token: write
-#     environment:
-#       name: github-pages
-#       url: ${{ steps.deployment.outputs.page_url }}
-#     steps:
-#       - name: Output deployment URL
-#         run: echo "Deployed to ${{ steps.deployment.outputs.page_url }}"
-#       # - name: Debug - List Files
-#       #   run: |
-#       #     echo "Listing files in the root directory:"
-#       #     ls -la
-#       # - name: Debug - Check config.js
-#       #   run: |
-#       #     echo "Contents of config.js:"
-#       #     cat config.js
-#       # - name: Debug - Environment Variables
-#       #   run: |
-#       #     echo "BIN_ID: ${{ secrets.BIN_ID }}"
-#       #     echo "API_KEY: ${{ secrets.API_KEY }}"
-#       - name: Deploy to GitHub Pages
-#         id: deployment
-#         uses: actions/deploy-pages@v4
-
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -109,7 +22,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Debug - List Files (Optional for Debugging)
+      # Step 2: Debug - List Files in Root Directory
       - name: Debug - List Files in Root Directory
         run: |
           echo "Listing files in the root directory:"
@@ -121,30 +34,42 @@ jobs:
           echo "export const BIN_ID = '${{ secrets.BIN_ID }}';" > ./config.js
           echo "export const API_KEY = '${{ secrets.API_KEY }}';" >> ./config.js
 
-      # Step 4: Debug - Check config.js (Optional for Debugging)
-      # Mask secrets to prevent them from being logged.
+      # Step 4: Debug - Check config.js Contents
       - name: Debug - Check config.js Contents
         run: |
           echo "Contents of config.js:"
           cat config.js | sed 's/${{ secrets.API_KEY }}/[MASKED]/g' | sed 's/${{ secrets.BIN_ID }}/[MASKED]/g'
 
-      # Step 6: Debug - List Build Output (Optional for Debugging)
+      # Step 5: Check if config.js exists
+      - name: Check if config.js exists
+        uses: andstor/file-existence-action@v3
+        with:
+          files: "config.js"
+        id: check_config_js
+
+      # Step 6: Config.js exists
+      - name: Config.js exists
+        if: steps.check_config_js.outputs.files_exists == 'true'
+        run: |
+          echo "config.js exists in the root directory."
+
+      # Step 7: Debug - List Build Output
       - name: Debug - List Files in Final Directory
         run: |
           echo "Listing files in the final directory before deployment:"
           ls -la .
 
-      # Step 7: Upload artifact for GitHub Pages deployment
+      # Step 8: Upload artifact for GitHub Pages deployment
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v2
         with:
           path: '.' # Adjust this to your build output directory if needed
 
-      # Step 8: Deploy to GitHub Pages
+      # Step 9: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
 
-      # Step 9: Output Deployment URL (Optional)
+      # Step 10: Output Deployment URL (Optional)
       - name: Output Deployment URL
         run: echo "Deployed to ${{ steps.deployment.outputs.page_url }}"
