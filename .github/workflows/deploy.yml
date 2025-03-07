@@ -1,6 +1,5 @@
 name: Deploy to GitHub Pages
 
-# on: [push]
 on:
   pull_request:
     paths-ignore:
@@ -15,22 +14,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Create config.js
         run: |
-          echo "const config = {" > config.js
-          echo "  BIN_ID: '${{ secrets.BIN_ID }}'," >> config.js
-          echo "  API_KEY: '${{ secrets.API_KEY }}'," >> config.js
-          echo "};" >> config.js
-      
-      # Add steps to build your site here if needed
-      # - name: Build site
-      #   run: your_build_command_here
-      
+          echo "export const BIN_ID = '${{ secrets.BIN_ID }}';" > config.js
+          echo "export const API_KEY = '${{ secrets.API_KEY }}';" >> config.js
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.' # Adjust this to your build output directory if needed
+          path: '.'
 
   deploy:
     needs: build-and-deploy
