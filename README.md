@@ -22,3 +22,10 @@ Background (Experience) -> my experience
 References -> recommendations
 About -> replace this with skills, and certifications
 Contact -> already updated
+
+Portfolio work section not properly rendering in phone -> done
+Update the counter code -> done
+Change this.site href -> done
+Check professor names -> done
+Change react icon on tab - done
+Test the new yml file for github actions which create a config.js file using github secrets and deploys the latest code

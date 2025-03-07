@@ -178,16 +178,16 @@
   .section.values > .content,
   .section.background > .content,
   .section.background .item,
-  /* .section.work > .content, */
-  /* .section.work .item, */
+  .section.work > .content,
+  .section.work .item,
   .section.references > .content,
   .section.about > .content {
     grid-template-columns: var(--grid--app-columns);
   }
   .section.background .description,
   .section.background .item .description,
-  /* .section.work .description, */
-  /* .section.work .item .description, */
+  .section.work .description,
+  .section.work .item .description,
   .section.references .item {
     grid-column: 1 / 3;
   }
@@ -237,6 +237,8 @@
   .section.values .description,
   .section.background .item .description,
   .section.background .description,
+  .section.work .item .description,
+  .section.work .description,
   .section.references .item,
   .section.about > .content,
   .section.about .biography {

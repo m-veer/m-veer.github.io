@@ -1,31 +1,45 @@
 name: Deploy to GitHub Pages
 
+# on: [push]
 on:
-  push:
+  pull_request:
     branches:
       - main
+    types:
+      - closed
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
+      - uses: actions/checkout@v3
+      
       - name: Create config.js
-        env:
-          TOKEN: ${{ secrets.TOKEN }}
-          REPO_OWNER: ${{ github.repository_owner }}
-          REPO_NAME: ${{ github.event.repository.name }}
-          FILE_PATH: ${{ secrets.JSON_FILE_PATH }}
         run: |
-          echo "export const TOKEN = '$TOKEN';" > config.js
-          echo "export const REPO_OWNER = '$REPO_OWNER';" >> config.js
-          echo "export const REPO_NAME = '$REPO_NAME';" >> config.js
-          echo "export const FILE_PATH = '$FILE_PATH';" >> config.js
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+          echo "const config = {" > config.js
+          echo "  BIN_ID: '${{ secrets.BIN_ID }}'," >> config.js
+          echo "  API_KEY: '${{ secrets.API_KEY }}'," >> config.js
+          echo "};" >> config.js
+      
+      # Add steps to build your site here if needed
+      # - name: Build site
+      #   run: your_build_command_here
+      
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.TOKEN }}
-          publish_dir: .
+          path: '.' # Adjust this to your build output directory if needed
+
+  deploy:
+    needs: build-and-deploy
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
