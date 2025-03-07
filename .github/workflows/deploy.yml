@@ -21,10 +21,10 @@ jobs:
           ls -la
       - name: Create config.js
         run: |
-          echo "Updating config.js file with database credentials..."
-          cat <<EOL > "config.js"
-          BIN_ID=${{ secrets.BIN_ID }}
-          API_KEY=${{ secrets.API_KEY }}
+          echo "Updating config.js file with keys"
+          cat <<EOL > config.js
+          export const BIN_ID='${{ secrets.BIN_ID }}';
+          export const API_KEY='${{ secrets.API_KEY }}';
           EOL
       - name: Debug - Check config.js
         run: |
