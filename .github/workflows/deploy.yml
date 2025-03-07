@@ -22,35 +22,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Debug - List Files in Root Directory
-      - name: Debug - List Files in Root Directory
-        run: |
-          echo "Listing files in the root directory:"
-          ls -la
-
-      # Step 3: Create config.js securely
+      # Step 2: Create config.js securely
       - name: Create config.js
         run: |
           echo "export const BIN_ID = '${{ secrets.BIN_ID }}';" > ./config.js
           echo "export const API_KEY = '${{ secrets.API_KEY }}';" >> ./config.js
 
-      # Step 4: Debug - Check config.js Contents
-      - name: Debug - Check config.js Contents
-        run: |
-          echo "Contents of config.js:"
-          cat config.js | sed 's/${{ secrets.API_KEY }}/[MASKED]/g' | sed 's/${{ secrets.BIN_ID }}/[MASKED]/g'
-
-      # Step 5: Debug - List Build Output
-      - name: Debug - List Files in Final Directory
-        run: |
-          echo "Listing files in the final directory before deployment:"
-          ls -la .
-
-      # Step 6: Deploy to GitHub Pages
+      # Step 3: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
-
-      # Step 7: Output Deployment URL (Optional)
-      - name: Output Deployment URL
-        run: echo "Deployed to ${{ steps.deployment.outputs.page_url }}"
+        uses: actions/deploy-pages@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
