@@ -15,10 +15,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Debug - List Files
-        run: |
-          echo "Listing files in the root directory:"
-          ls -la
+
       - name: Create config.js
         run: |
           echo "Updating config.js file with keys"
@@ -27,19 +24,12 @@ jobs:
           export const API_KEY_JSON='${{ secrets.API_KEY_JSON }}';
           export const API_KEY_IP='${{ secrets.API_KEY_IP }}';
           EOL
-      - name: Debug - Check config.js
-        run: |
-          echo "Contents of config.js:"
-          cat config.js
-      - name: Debug - Environment Variables
-        run: |
-          echo "BIN_ID_JSON: ${{ secrets.BIN_ID_JSON }}"
-          echo "API_KEY_JSON: ${{ secrets.API_KEY_JSON }}"
-          echo "API_KEY_IP: ${{ secrets.API_KEY_IP }}"
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -53,6 +43,7 @@ jobs:
     steps:
       - name: Output deployment URL
         run: echo "Deployed to ${{ steps.deployment.outputs.page_url }}"
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
