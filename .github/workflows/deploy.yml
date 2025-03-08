@@ -23,8 +23,9 @@ jobs:
         run: |
           echo "Updating config.js file with keys"
           cat <<EOL > config.js
-          export const BIN_ID='${{ secrets.BIN_ID }}';
-          export const API_KEY='${{ secrets.API_KEY }}';
+          export const BIN_ID_JSON='${{ secrets.BIN_ID_JSON }}';
+          export const API_KEY_JSON='${{ secrets.API_KEY_JSON }}';
+          export const API_KEY_IP='${{ secrets.API_KEY_IP }}';
           EOL
       - name: Debug - Check config.js
         run: |
@@ -32,8 +33,9 @@ jobs:
           cat config.js
       - name: Debug - Environment Variables
         run: |
-          echo "BIN_ID: ${{ secrets.BIN_ID }}"
-          echo "API_KEY: ${{ secrets.API_KEY }}"
+          echo "BIN_ID_JSON: ${{ secrets.BIN_ID_JSON }}"
+          echo "API_KEY_JSON: ${{ secrets.API_KEY_JSON }}"
+          echo "API_KEY_IP: ${{ secrets.API_KEY_IP }}"
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
