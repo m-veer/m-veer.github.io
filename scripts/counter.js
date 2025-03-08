@@ -1,103 +1,69 @@
-// const TOKEN = 'your_personal_access_token';
-// const REPO_OWNER = 'your_github_username';
-// const REPO_NAME = 'your_repository_name';
-// const FILE_PATH = 'visitor_count.json';
-
-// import { TOKEN, REPO_OWNER, REPO_NAME, FILE_PATH } from '../config.js';
-
-// async function getIPAddress() {
-//     try {
-//         const response = await fetch('https://api.ipify.org?format=json');
-//         const data = await response.json();
-//         return data.ip;
-//     } catch (error) {
-//         console.error('Error fetching IP:', error);
-//         return 'Unknown';
-//     }
-// }
-
-// async function updateVisitorCount() {
-//   try {
-//     const ip = await getIPAddress();
-
-//     // Fetch current file content
-//     const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`, {
-//       headers: {
-//         'Authorization': `token ${TOKEN}`,
-//         'Accept': 'application/vnd.github.v3+json'
-//       }
-//     });
-//     const data = await response.json();
-    
-//     // Parse content and update count and IP
-//     const content = JSON.parse(atob(data.content));
-//     content.count++;
-//     content.IP = ip;
-    
-//     // Update file on GitHub
-//     await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`, {
-//       method: 'PUT',
-//       headers: {
-//         'Authorization': `token ${TOKEN}`,
-//         'Accept': 'application/vnd.github.v3+json',
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify({
-//         message: 'Update visitor count and IP',
-//         content: btoa(JSON.stringify(content)),
-//         sha: data.sha
-//       })
-//     });
-
-//     console.log('Visitor count and IP updated successfully');
-//   } catch (error) {
-//     console.error('Error updating visitor count and IP:', error);
-//   }
-// }
-
-// // Call updateVisitorCount when the page loads
-// window.onload = updateVisitorCount;
-
-import { BIN_ID, API_KEY } from '../config.js';
+import { BIN_ID_JSON, API_KEY_JSON, API_KEY_IP } from '../config.js';
 
 function decodeBase64(base64String) {
   return atob(base64String);
 }
 
-let base64Encoded_BIN = BIN_ID;
+let base64Encoded_BIN = BIN_ID_JSON;
 let decodedString_BIN = decodeBase64(base64Encoded_BIN);
-let base64Encoded_API = API_KEY;
-let decodedString_API = decodeBase64(base64Encoded_API);
+let base64Encoded_API_JSON = API_KEY_JSON;
+let decodedString_API_JSON = decodeBase64(base64Encoded_API_JSON);
+let base64Encoded_API_IP = API_KEY_IP;
+let decodedString_API_IP = decodeBase64(base64Encoded_API_IP);
 
 async function updateCounter() {
   try {
     // Fetch current data
     const response = await fetch(`https://api.jsonbin.io/v3/b/${decodedString_BIN}/latest`, {
       headers: {
-        'X-Master-Key': decodedString_API
+        'X-Master-Key': decodedString_API_JSON
       }
     });
     const data = await response.json();
     const content = data.record;
 
     // Increment count
-    content.count = (content.count || 0) + 1;
+    content.Count = (content.Count || 0) + 1;
 
     // Get current IP
     const ipResponse = await fetch('https://api.ipify.org?format=json');
     const ipData = await ipResponse.json();
     const currentIP = ipData.ip;
 
+    // Construct the API request URL
+    const IPurl = `https://ipinfo.io/${currentIP}?token=${decodedString_API_IP}`;
+
+    // Fetch the geolocation data
+    const geoResponse = await fetch(IPurl);
+    const geoData = await geoResponse.json();
+
+    // Extract the required information
+    const city = geoData.city;
+    const region = geoData.region;
+    const postalCode = geoData.postal;
+    const country = geoData.country;
+    const continent = geoData.loc.split(',')[0];
+    const metroCode = geoData.loc;
+    const coordinates = geoData.loc;
+    const hostname = geoData.hostname;
+
     // Get current date and time
-    // const currentDateTime = new Date().toISOString();
     const currentDateTime = new Date().toLocaleString("en-US", { timeZone: "America/New_York" });
 
     // Add new object with count, IP, and DateTime
-    const newKey = `visit_${content.count}`;
+    const newKey = `visit_${content.Count}`;
     const newValue = {
-      "count": content.count.toString(),
+      "Count": content.Count.toString(),
       "IP": currentIP,
-      "DateTime": currentDateTime
+      "DateTime": currentDateTime,
+      "City": city,
+      "Region": region,
+      "PostalCode": postalCode,
+      "Country": country,
+      "Continent": continent,
+      "MetroCode": metroCode,
+      "COOrdinates": coordinates,
+      "HostName": hostname
     };
     content[newKey] = newValue;
 
@@ -106,7 +72,7 @@ async function updateCounter() {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'X-Master-Key': decodedString_API
+        'X-Master-Key': decodedString_API_JSON
       },
       body: JSON.stringify(content)
     });
