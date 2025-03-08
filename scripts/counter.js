@@ -60,19 +60,14 @@
 
 import { BIN_ID, API_KEY } from '../config.js';
 
-console.log(BIN_ID);
-console.log(API_KEY);
-
 function decodeBase64(base64String) {
   return atob(base64String);
 }
 
 let base64Encoded_BIN = BIN_ID;
 let decodedString_BIN = decodeBase64(base64Encoded_BIN);
-console.log(decodedString_BIN);
 let base64Encoded_API = API_KEY;
 let decodedString_API = decodeBase64(base64Encoded_API);
-console.log(decodedString_API);
 
 async function updateCounter() {
   try {
