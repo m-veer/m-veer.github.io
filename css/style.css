@@ -2,7 +2,16 @@
 
 /* Style
 ----------------------------------------------------------------------------- */
+.section.work .item .role a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
 
+.section.work .item .role a:hover {
+  opacity: 0.7;
+  text-decoration: underline;
+}
 
 /* Section cover
 ----------------------------------------------------------------------------- */
