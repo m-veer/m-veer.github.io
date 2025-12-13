@@ -1,13 +1,18 @@
 name: Deploy to GitHub Pages
 
 on:
-  pull_request:
-    paths-ignore:
-      - 'yml-scripts/**'
+  # pull_request:
+  #   paths-ignore:
+  #     - 'yml-scripts/**'
+  #   branches:
+  #     - main
+  #   types:
+  #     - closed
+  push:
     branches:
       - main
-    types:
-      - closed
+    paths-ignore:
+      - 'yml-scripts/**'
 
 jobs:
   build:
@@ -41,9 +46,9 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Output deployment URL
-        run: echo "Deployed to ${{ steps.deployment.outputs.page_url }}"
-
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Output deployment URL
+        run: echo "Deployed to ${{ steps.deployment.outputs.page_url }}"
