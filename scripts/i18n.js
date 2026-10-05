@@ -152,12 +152,27 @@
 
     // The slider is rotated -90deg, so position 0 sits at the bottom and each
     // step is 20px further up
-    container.addEventListener('mousemove', function (event) {
+    function positionAt(event) {
       var rect = container.getBoundingClientRect();
       var position = Math.round((rect.bottom - event.clientY - 24) / 20);
-      show(Math.max(0, Math.min(LOCALES.length, position)));
+      return Math.max(0, Math.min(LOCALES.length, position));
+    }
+    container.addEventListener('mousemove', function (event) {
+      show(positionAt(event));
     });
     container.addEventListener('mouseleave', hide);
+
+    // The range thumb is 48px tall but positions are 20px apart, so a click on
+    // a neighbouring position lands on the thumb and the browser ignores it.
+    // Clicks therefore pick the position under the pointer directly; dragging
+    // still works through the slider's own input events.
+    container.addEventListener('click', function (event) {
+      var position = positionAt(event);
+      if (position !== currentIndex) {
+        setTheme(position);
+        show(position);
+      }
+    });
     $('.app-aside .slider').on('input', function () { show(parseInt(this.value, 10)); });
     $('.app-aside .slider').on('change', function () { window.setTimeout(hide, 900); });
   }
