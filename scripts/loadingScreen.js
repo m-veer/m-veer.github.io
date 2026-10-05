@@ -1,15 +1,25 @@
-const greetings = [
-  { text: "Hello World", language: "English", countryCode: "gb" },
-  { text: "नमस्ते दुनिया", language: "Hindi", countryCode: "in" },
-  { text: "नमस्कार जग", language: "Marathi", countryCode: "in" },
-  { text: "مرحبا بالعالم", language: "Arabic", countryCode: "sa" },
-  { text: "Bonjour le monde", language: "French", countryCode: "fr" },
-  { text: "こんにちは世界", language: "Japanese", countryCode: "jp" },
-  { text: "Hola Mundo", language: "Spanish", countryCode: "es" },
-  { text: "Ciao Mondo", language: "Italian", countryCode: "it" },
-  { text: "你好，世界", language: "Chinese", countryCode: "cn" },
-  { text: "안녕하세요 세계", language: "Korean", countryCode: "kr" }
-];
+// Greetings come from the shared language list in scripts/locales.js
+const greetings = window.PORTFOLIO_LOCALES;
+
+// How long each greeting stays on screen, in milliseconds
+const GREETING_DURATION = 480;
+const GREETING_SWAP = 150;
+
+function escapeHTML(text) {
+  return text.replace(/[&<>"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[char]);
+}
+
+// The words inside a string's quotes sit in <bdi>, so right-to-left text like
+// Arabic stays between its quotes instead of reordering the code around it
+function renderCode(tokens) {
+  return tokens.map(([type, text]) => {
+    if (type !== 'str') {
+      return `<span class="token-${type}">${escapeHTML(text)}</span>`;
+    }
+    const [, open, words, close] = text.match(/^(['"]?)(.*?)(['"]?)$/);
+    return `<span class="token-str">${escapeHTML(open)}<bdi>${escapeHTML(words)}</bdi>${escapeHTML(close)}</span>`;
+  }).join('');
+}
 
 // const greetings = [
 //   { text: "Hello World", language: "English", flag: "🇬🇧" },
@@ -40,33 +50,65 @@ const greetingContainer = document.querySelector('.greeting-container');
 const greetingText = document.querySelector('.greeting-text');
 let currentIndex = 0;
 
+// Keep the portfolio hidden until the loading screen has fully lifted away
+document.body.classList.add('is--intro-pending');
+
 function showGreeting() {
-  greetingContainer.classList.remove('fade-in');
-  
+  const loadingScreen = document.querySelector('.loading-screen');
+  greetingText.classList.add('is--swapping');
+
   setTimeout(() => {
       // greetingText.innerHTML = `${greetings[currentIndex].text} 👋`;
       // greetingText.innerHTML = `${greetings[currentIndex].flag} ${greetings[currentIndex].text}`;
-      greetingText.innerHTML = `<span class="flag-icon flag-icon-${greetings[currentIndex].countryCode}"></span> ${greetings[currentIndex].text}`;
-      greetingContainer.classList.add('fade-in');
-      
+      const greeting = greetings[currentIndex];
+      greetingText.innerHTML =
+        `<code class="greeting-code"><span class="flag-icon flag-icon-${greeting.countryCode}"></span>${renderCode(greeting.greeting)}<span class="greeting-cursor" aria-hidden="true"></span></code>`;
+      loadingScreen.style.setProperty('--greeting-from', greeting.colors[0]);
+      loadingScreen.style.setProperty('--greeting-to', greeting.colors[1]);
+      greetingText.classList.remove('is--swapping');
+
       currentIndex++;
-      
+
       if (currentIndex < greetings.length) {
-          setTimeout(showGreeting, 100);
+          setTimeout(showGreeting, GREETING_DURATION);
       } else {
-          setTimeout(finishLoading, 100);
+          // Let the last greeting settle before the curtain lifts
+          setTimeout(finishLoading, GREETING_DURATION);
       }
-  }, 100);
+  }, GREETING_SWAP);
 }
 
 function finishLoading() {
   const loadingScreen = document.querySelector('.loading-screen');
   const mainContent = document.querySelector('.main-content');
-  
-  loadingScreen.style.transform = 'translateY(-100%)';
-  // loadingScreen.style.opacity = '0';
-  // loadingScreen.style.remove();
-  mainContent.style.opacity = '1';
+
+  // Settle the last language's gradient into its first color and lift the
+  // screen in that color: lifting it in black over the black page would make
+  // the exit invisible
+  const lastColor = greetings[greetings.length - 1].colors[0];
+  loadingScreen.style.setProperty('--greeting-from', lastColor);
+  loadingScreen.style.setProperty('--greeting-to', lastColor);
+  loadingScreen.classList.add('is--lifting');
+
+  // Fade the portfolio in as soon as the screen has cleared the top. With the
+  // lift's ease-in-out curve the screen is ~98% gone at 80% of its duration,
+  // so there is no need to wait for the animation's final frames. Timings
+  // are read from the CSS so they stay in one place.
+  const lift = getComputedStyle(loadingScreen);
+  const seconds = (value) => parseFloat(value.split(',')[0]) || 0;
+  const revealAfter = (seconds(lift.transitionDelay) + seconds(lift.transitionDuration) * 0.8) * 1000;
+  setTimeout(() => {
+    mainContent.style.opacity = '1';
+    document.body.classList.remove('is--intro-pending');
+    document.body.classList.add('is--revealing');
+  }, revealAfter);
+
+  // Take the screen out of the page once it has fully lifted away
+  loadingScreen.addEventListener('transitionend', function(event) {
+    if (event.target === loadingScreen && (event.propertyName === 'transform' || event.propertyName === 'opacity')) {
+      loadingScreen.style.display = 'none';
+    }
+  });
 }
 
 // Start the animation when page loads

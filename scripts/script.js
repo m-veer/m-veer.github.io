@@ -21,19 +21,10 @@ $(document).ready(function() {
   // console.log('Current year is ' + currentYear);
   // console.log('Setting copyright accordingly');
 
-  // Detect if user prefers dark mode and make it dark
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    if ( $('body').hasClass('theme--16') ){
-         appThemeRemoveAll();
-         $('body').addClass('theme--00');
-         $('.app-aside .slider').val(0);
-    }
-  }
-
   // Auto hide app cover on load
   function hideAppCoverDelay() {
-    // window.setTimeout(hideAppCover, 1500);
-    window.setTimeout(hideAppCover, 1750);
+    // Finishes sliding in before the loading screen lifts away
+    window.setTimeout(hideAppCover, 1500);
   }
   function hideAppCover() {
     $('body').removeClass('cover--is--visible');
@@ -189,21 +180,9 @@ $(document).ready(function() {
     }
   });
 
-  // Theme slider
+  // Theme slider: black, or a country's colors, language, and code flavor
   $('.app-aside .slider').on('input', function() {
-    var sliderValue = $(this).val();
-
-    // put in a leading zero
-    if ( sliderValue < 10 ){
-      sliderValue = 0 + sliderValue;
-    }
-    // console.log(sliderValue);
-
-    // detect and remove class names that start with 'theme--'
-    appThemeRemoveAll();
-
-    // add new class name
-    $('body').addClass('theme--' + sliderValue);
+    portfolioSetTheme($(this).val());
   });
 
   // Grid overlay
@@ -221,33 +200,72 @@ $(document).ready(function() {
       $('.section.intro .gradient-mask.left').removeClass('is--visible');
     }
   });
+  // Each option's audience class (e.g. "recruiters") matches the text to show
   $('.section.intro .option').click(function() {
+    var audience = this.className.replace(/\b(option|is--active)\b/g, '').trim();
     $('.section.intro .option').removeClass('is--active');
     $('.section.intro .text').removeClass('is--visible');
+    $(this).addClass('is--active');
+    $('.section.intro .text.' + audience).addClass('is--visible');
   });
-  $('.section.intro .option.anyone').click(function() {
-    $('.section.intro .option.anyone').addClass('is--active');
-    $('.section.intro .text.anyone').addClass('is--visible');
-  });
-  $('.section.intro .option.recruiters').click(function() {
-    $('.section.intro .option.recruiters').addClass('is--active');
-    $('.section.intro .text.recruiters').addClass('is--visible');
-  });
-  $('.section.intro .option.design-directors').click(function() {
-    $('.section.intro .option.design-directors').addClass('is--active');
-    $('.section.intro .text.design-directors').addClass('is--visible');
-  });
-  $('.section.intro .option.product-designers').click(function() {
-    $('.section.intro .option.product-designers').addClass('is--active');
-    $('.section.intro .text.product-designers').addClass('is--visible');
-  });
-  $('.section.intro .option.product-managers').click(function() {
-    $('.section.intro .option.product-managers').addClass('is--active');
-    $('.section.intro .text.product-managers').addClass('is--visible');
-  });
-  $('.section.intro .option.engineers').click(function() {
-    $('.section.intro .option.engineers').addClass('is--active');
-    $('.section.intro .text.engineers').addClass('is--visible');
+
+  // Reveal cards and headings as they scroll into view
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var revealItems = $('.section.work .item, .section.background .item, .section.references .item, .section.values .title h1, .section.contact .image figure').addClass('reveal');
+    $('.section.work .stack').each(function() {
+      $(this).children('.tag').each(function(index) {
+        this.style.setProperty('--tag-index', index);
+      });
+    });
+    var revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          $(entry.target).addClass('is--revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    revealItems.each(function() {
+      revealObserver.observe(this);
+    });
+    $('html').addClass('reveal--ready');
+  }
+
+  // Project and job descriptions stay folded until their title is hovered,
+  // tapped, or focused; they stay open while the pointer is on the item
+  $('.section .item').has('.item-details').each(function(index) {
+    var item = $(this);
+    var title = item.find('.role').first();
+    var details = item.find('.item-details');
+    var detailsId = 'item-details-' + index;
+    details.attr('id', detailsId);
+    item.addClass('has--details');
+    title.attr({ 'tabindex': 0, 'role': 'button', 'aria-expanded': 'false', 'aria-controls': detailsId });
+
+    function setOpen(open) {
+      item.toggleClass('is--open', open);
+      if (open) {
+        $('body').addClass('has--opened-details');
+      }
+      title.attr('aria-expanded', open ? 'true' : 'false');
+    }
+
+    title.on('mouseenter', function() { setOpen(true); });
+    item.on('mouseleave', function() { setOpen(false); });
+    // Taps toggle; mouse clicks don't, since hovering already opened it.
+    // Links inside a title (live demos, repos) keep working.
+    title.on('pointerup', function(event) {
+      if (event.originalEvent.pointerType === 'mouse' || $(event.target).closest('a').length) {
+        return;
+      }
+      setOpen(!item.hasClass('is--open'));
+    });
+    title.on('keydown', function(event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        setOpen(!item.hasClass('is--open'));
+      }
+    });
   });
 
   // Scroll to Contact from text links in sections
@@ -379,107 +397,14 @@ function appThemeRemoveAll() {
   });
 }
 
-// Toggle between black and white themes
+// 'b' and 'w' reset to the default black theme
 function appTheme() {
-  if ( $('body').hasClass('theme--00') ){
-    appThemeRemoveAll();
-    $('body').addClass('theme--16');
-    $('.app-aside .slider').val(16);
-  }
-  else {
-       appThemeRemoveAll();
-       $('body').addClass('theme--00');
-       $('.app-aside .slider').val(0);
-  }
+  portfolioSetTheme(0);
 }
 
-// Cycle through all themes
+// 's' steps through the country themes
 function appThemeSpectrum() {
-  if ( $('body').hasClass('theme--16') ){
-       appThemeRemoveAll();
-       $('body').addClass('theme--15');
-       $('.app-aside .slider').val(15);
-  }
-  else if ( $('body').hasClass('theme--15') ){
-            appThemeRemoveAll();
-            $('body').addClass('theme--14');
-            $('.app-aside .slider').val(14);
-  }
-  else if ( $('body').hasClass('theme--14') ){
-            appThemeRemoveAll();
-            $('body').addClass('theme--13');
-            $('.app-aside .slider').val(13);
-  }
-  else if ( $('body').hasClass('theme--13') ){
-            appThemeRemoveAll();
-            $('body').addClass('theme--12');
-            $('.app-aside .slider').val(12);
-  }
-  else if ( $('body').hasClass('theme--12') ){
-            appThemeRemoveAll();
-            $('body').addClass('theme--11');
-            $('.app-aside .slider').val(11);
-  }
-  else if ( $('body').hasClass('theme--11') ){
-            appThemeRemoveAll();
-            $('body').addClass('theme--10');
-            $('.app-aside .slider').val(10);
-  }
-  else if ( $('body').hasClass('theme--10') ){
-            appThemeRemoveAll();
-            $('body').addClass('theme--09');
-            $('.app-aside .slider').val(9);
-  }
-  else if ( $('body').hasClass('theme--09') ){
-            appThemeRemoveAll();
-            $('body').addClass('theme--08');
-            $('.app-aside .slider').val(8);
-  }
-  else if ( $('body').hasClass('theme--08') ){
-            appThemeRemoveAll();
-            $('body').addClass('theme--07');
-            $('.app-aside .slider').val(7);
-  }
-  else if ( $('body').hasClass('theme--07') ){
-            appThemeRemoveAll();
-            $('body').addClass('theme--06');
-            $('.app-aside .slider').val(6);
-  }
-  else if ( $('body').hasClass('theme--06') ){
-            appThemeRemoveAll();
-            $('body').addClass('theme--05');
-            $('.app-aside .slider').val(5);
-  }
-  else if ( $('body').hasClass('theme--05') ){
-            appThemeRemoveAll();
-            $('body').addClass('theme--04');
-            $('.app-aside .slider').val(4);
-  }
-  else if ( $('body').hasClass('theme--04') ){
-            appThemeRemoveAll();
-            $('body').addClass('theme--03');
-            $('.app-aside .slider').val(3);
-  }
-  else if ( $('body').hasClass('theme--03') ){
-            appThemeRemoveAll();
-            $('body').addClass('theme--02');
-            $('.app-aside .slider').val(2);
-  }
-  else if ( $('body').hasClass('theme--02') ){
-            appThemeRemoveAll();
-            $('body').addClass('theme--01');
-            $('.app-aside .slider').val(1);
-  }
-  else if ( $('body').hasClass('theme--01') ){
-            appThemeRemoveAll();
-            $('body').addClass('theme--00');
-            $('.app-aside .slider').val(0);
-  }
-  else if ( $('body').hasClass('theme--00') ){
-            appThemeRemoveAll();
-            $('body').addClass('theme--16');
-            $('.app-aside .slider').val(16);
-  }
+  portfolioSetTheme((portfolioThemeIndex() + 1) % (window.PORTFOLIO_LOCALES.length + 1));
 }
 
 // Grid overlay

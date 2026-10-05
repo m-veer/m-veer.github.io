@@ -11,8 +11,15 @@
     overflow-x: hidden;
 } */
 
+/* Each greeting tints the screen with its flag's colors. Registering the two
+   gradient stops as colors lets the browser crossfade between languages. */
+@property --greeting-from { syntax: '<color>'; inherits: true; initial-value: black; }
+@property --greeting-to   { syntax: '<color>'; inherits: false; initial-value: black; }
+
 .loading-screen {
     background-color: rgb(0 0 0 / 1);
+    background-image: linear-gradient(135deg, var(--greeting-from), var(--greeting-to));
+    color: white;
     height: 100vh;
     width: 100%;
     display: flex;
@@ -20,7 +27,124 @@
     align-items: center;
     position: fixed;
     z-index: 1000;
-    transition: transform 1s ease-in-out;
+    will-change: transform;
+    transition:
+        transform 0.9s cubic-bezier(0.76, 0, 0.24, 1),
+        --greeting-from 0.45s ease,
+        --greeting-to 0.45s ease;
+}
+
+/* Curved trailing edge. It hangs just below the viewport and moves with the
+   screen, so the lift animates transform only and never repaints */
+.loading-screen::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    height: 16vh;
+    margin-top: -1px;
+    /* matches the solid color the screen settles on before lifting */
+    background-color: var(--greeting-from);
+    border-radius: 0 0 50% 50% / 0 0 100% 100%;
+}
+
+/* Curtain lift: the last language's gradient settles into one solid color
+   (so it stands out against the black page) and the greeting fades up
+   first, then the screen and its curved edge lift fully out of view */
+.loading-screen.is--lifting {
+    transform: translateY(calc(-100% - 16vh));
+    transition-delay: 0.25s, 0s, 0s;
+}
+
+/* The portfolio stays hidden while the curtain lifts, then fades in, without
+   moving, as soon as the curtain has cleared the top of the screen */
+body.is--intro-pending .app-header,
+body.is--intro-pending .app-nav,
+body.is--intro-pending .app-aside,
+body.is--intro-pending .app-main {
+    opacity: 0;
+}
+body.is--revealing .app-header,
+body.is--revealing .app-nav,
+body.is--revealing .app-aside,
+body.is--revealing .app-main {
+    animation: portfolio-fade-in 0.6s cubic-bezier(0.33, 0, 0.2, 1) backwards;
+}
+@keyframes portfolio-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+.greeting-text {
+    transition: opacity 0.25s cubic-bezier(0.33, 0, 0.2, 1), transform 0.25s cubic-bezier(0.33, 0, 0.2, 1);
+}
+/* Greeting as the flag followed by a syntax-highlighted print statement and a
+   blinking cursor */
+.greeting-code .flag-icon {
+    margin-right: 0.6em;
+    vertical-align: -0.1em;
+}
+.greeting-text .greeting-code {
+    display: block;
+    direction: ltr;
+    unicode-bidi: isolate;
+    font-size: clamp(0.75rem, 3vw, 2.1rem);
+    line-height: 1.3;
+}
+/* font.css sets the site font on every element, so the code font has to be
+   applied to the token spans directly rather than inherited */
+.greeting-text .greeting-code,
+.greeting-text .greeting-code * {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    font-feature-settings: normal;
+}
+.greeting-code bdi {
+    unicode-bidi: isolate;
+}
+.greeting-code .token-fn  { color: rgb(142 201 255); }
+.greeting-code .token-obj { color: rgb(255 255 255 / 0.9); }
+.greeting-code .token-p   { color: rgb(255 255 255 / 0.55); white-space: pre; }
+.greeting-code .token-str { color: rgb(255 216 138); }
+.greeting-code .greeting-cursor {
+    display: inline-block;
+    width: 0.55em;
+    height: 1.1em;
+    margin-left: 0.15em;
+    vertical-align: text-bottom;
+    background-color: rgb(255 255 255 / 0.85);
+    animation: greeting-cursor-blink 0.9s steps(1) infinite;
+}
+@keyframes greeting-cursor-blink {
+    50% { opacity: 0; }
+}
+
+/* Quick dip while one greeting swaps for the next */
+.greeting-text.is--swapping {
+    opacity: 0;
+    transform: translateY(8px);
+    transition-duration: 0.15s;
+}
+.loading-screen.is--lifting .greeting-text {
+    opacity: 0;
+    transform: translateY(-24px);
+    transition-duration: 0.4s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .greeting-code .greeting-cursor {
+        animation: none;
+    }
+    .loading-screen.is--lifting {
+        transform: none;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+    body.is--revealing .app-header,
+    body.is--revealing .app-nav,
+    body.is--revealing .app-aside,
+    body.is--revealing .app-main {
+        animation: none;
+    }
 }
 
 .greeting-container {
@@ -38,7 +162,6 @@
 
 .main-content {
     opacity: 0;
-    transition: opacity 1s ease-in-out;
     height: 100vh;
     padding: 20px;
 }
