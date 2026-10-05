@@ -13,6 +13,148 @@
   text-decoration: underline;
 }
 
+/* Technology stack chips on project cards */
+.section.work .item .stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-width: 50%;
+}
+.section.work .item .stack .tag {
+  font-size: 13px;
+  line-height: 1;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--color--foreground--15);
+  color: var(--color--foreground--100);
+  background-color: var(--color--foreground--5);
+  white-space: nowrap;
+}
+.section.work .item .description,
+.section.background .item .description {
+  line-height: 1.5;
+}
+
+/* Skills labels */
+.section.about .skills .label {
+  display: block;
+  font-size: 13px;
+  color: var(--color--foreground--50);
+  padding-bottom: 2px;
+}
+
+/* Scroll reveal: armed only once script.js adds .reveal--ready, so content
+   stays visible if JavaScript is off or motion is reduced */
+html.reveal--ready .reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.9s cubic-bezier(0.33, 0, 0.2, 1), transform 0.9s cubic-bezier(0.33, 0, 0.2, 1);
+}
+html.reveal--ready .reveal.is--revealed {
+  opacity: 1;
+  transform: none;
+}
+html.reveal--ready .section.values .title h1:nth-child(2) { transition-delay: 0.08s; }
+html.reveal--ready .section.values .title h1:nth-child(3) { transition-delay: 0.16s; }
+html.reveal--ready .section.values .title h1:nth-child(4) { transition-delay: 0.24s; }
+
+/* Chips fill in one after another as their card reveals */
+html.reveal--ready .reveal .stack .tag {
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.33, 0, 0.2, 1), background-color 0.25s ease, border-color 0.25s ease;
+  transition-delay: calc(0.3s + var(--tag-index, 0) * 0.03s), 0s, 0s;
+}
+html.reveal--ready .reveal.is--revealed .stack .tag {
+  opacity: 1;
+}
+
+/* Intro text fades up when switching audience */
+.section.intro .text.is--visible {
+  animation: intro-text-in 0.6s cubic-bezier(0.33, 0, 0.2, 1) both;
+}
+@keyframes intro-text-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Theme crossfade: registering the palette variables as colors lets the
+   browser interpolate them, so every element eases to the new theme */
+@property --color--foreground--100 { syntax: '<color>'; inherits: true; initial-value: black; }
+@property --color--foreground--50  { syntax: '<color>'; inherits: true; initial-value: black; }
+@property --color--foreground--33  { syntax: '<color>'; inherits: true; initial-value: black; }
+@property --color--foreground--25  { syntax: '<color>'; inherits: true; initial-value: black; }
+@property --color--foreground--20  { syntax: '<color>'; inherits: true; initial-value: black; }
+@property --color--foreground--15  { syntax: '<color>'; inherits: true; initial-value: black; }
+@property --color--foreground--10  { syntax: '<color>'; inherits: true; initial-value: black; }
+@property --color--foreground--5   { syntax: '<color>'; inherits: true; initial-value: black; }
+@property --color--foreground--0   { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --color--background--100 { syntax: '<color>'; inherits: true; initial-value: white; }
+@property --color--background--0   { syntax: '<color>'; inherits: true; initial-value: transparent; }
+body {
+  transition:
+    --color--foreground--100 0.6s ease, --color--foreground--50 0.6s ease,
+    --color--foreground--33 0.6s ease, --color--foreground--25 0.6s ease,
+    --color--foreground--20 0.6s ease, --color--foreground--15 0.6s ease,
+    --color--foreground--10 0.6s ease, --color--foreground--5 0.6s ease,
+    --color--foreground--0 0.6s ease, --color--background--100 0.6s ease,
+    --color--background--0 0.6s ease;
+}
+
+/* Profile photo settles into place as it reveals */
+html.reveal--ready .section.contact .image figure.reveal {
+  transform: scale(1.04);
+  transition-duration: 1.2s;
+}
+html.reveal--ready .section.contact .image figure.reveal.is--revealed {
+  transform: none;
+}
+
+/* Hover details */
+.section.work .item .stack .tag {
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+.section.work .item .stack .tag:hover {
+  background-color: var(--color--foreground--10);
+  border-color: var(--color--foreground--33);
+}
+.section.contact .actions a .fa {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.33, 0, 0.2, 1);
+}
+.section.contact .actions a:hover .fa {
+  transform: translateY(-3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section.intro .text.is--visible {
+    animation: none;
+  }
+  body {
+    transition: none;
+  }
+  .section.contact .actions a:hover .fa {
+    transform: none;
+  }
+}
+@media print {
+  html.reveal--ready .reveal,
+  html.reveal--ready .reveal .stack .tag {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+a:focus-visible {
+  outline: 2px solid var(--color--foreground--50);
+  outline-offset: 3px;
+}
+
+@media (max-width: 900px) {
+  .section.work .item .stack {
+    max-width: 100%;
+  }
+}
+
 /* Section cover
 ----------------------------------------------------------------------------- */
 
@@ -400,7 +542,7 @@
     /* transition: color 0.3s ease, background-color 0.3s ease; */
   }
   body.theme-slider--is--visible .app-aside .option.theme {
-    height: 368px;
+    height: 248px;
     transition: height 0.3s ease;
   }
   body.theme-slider--is--visible .app-aside .option.theme .icon-container {
@@ -408,7 +550,7 @@
     transition-delay: 0s !important;
   }
   body.theme-slider--is--visible .app-aside .option.theme .slider-container {
-    width: 368px;
+    width: 248px;
     transition: width 0.3s ease;
     pointer-events: auto;
   }
@@ -418,12 +560,6 @@
     transition: transform 0.3s ease, opacity 0.3s ease;
   }
   
-  body.theme-slider--is--visible.theme--16 .app-aside .option.theme .icon-container { bottom: 320px; }
-  body.theme-slider--is--visible.theme--15 .app-aside .option.theme .icon-container { bottom: 300px; }
-  body.theme-slider--is--visible.theme--14 .app-aside .option.theme .icon-container { bottom: 280px; }
-  body.theme-slider--is--visible.theme--13 .app-aside .option.theme .icon-container { bottom: 260px; }
-  body.theme-slider--is--visible.theme--12 .app-aside .option.theme .icon-container { bottom: 240px; }
-  body.theme-slider--is--visible.theme--11 .app-aside .option.theme .icon-container { bottom: 220px; }
   body.theme-slider--is--visible.theme--10 .app-aside .option.theme .icon-container { bottom: 200px; }
   body.theme-slider--is--visible.theme--09 .app-aside .option.theme .icon-container { bottom: 180px; }
   body.theme-slider--is--visible.theme--08 .app-aside .option.theme .icon-container { bottom: 160px; }
@@ -434,50 +570,32 @@
   body.theme-slider--is--visible.theme--03 .app-aside .option.theme .icon-container { bottom: 60px; }
   body.theme-slider--is--visible.theme--02 .app-aside .option.theme .icon-container { bottom: 40px; }
   body.theme-slider--is--visible.theme--01 .app-aside .option.theme .icon-container { bottom: 20px; }
-  body.theme-slider--is--visible.theme--00 .app-aside .option.theme .icon-container { bottom: 0; }
+  body.theme-slider--is--visible.theme--00 .app-aside .option.theme .icon-container { bottom: 0px; }
   
-  body.theme--16 .app-aside .option.theme .icon-container { transition-delay: 0.00s; }
-  body.theme--15 .app-aside .option.theme .icon-container { transition-delay: 0.02s; }
-  body.theme--14 .app-aside .option.theme .icon-container { transition-delay: 0.04s; }
-  body.theme--13 .app-aside .option.theme .icon-container { transition-delay: 0.06s; }
-  body.theme--12 .app-aside .option.theme .icon-container { transition-delay: 0.08s; }
-  body.theme--11 .app-aside .option.theme .icon-container { transition-delay: 0.10s; }
-  body.theme--10 .app-aside .option.theme .icon-container { transition-delay: 0.12s; }
-  body.theme--09 .app-aside .option.theme .icon-container { transition-delay: 0.14s; }
-  body.theme--08 .app-aside .option.theme .icon-container { transition-delay: 0.16s; }
-  body.theme--07 .app-aside .option.theme .icon-container { transition-delay: 0.18s; }
-  body.theme--06 .app-aside .option.theme .icon-container { transition-delay: 0.20s; }
-  body.theme--05 .app-aside .option.theme .icon-container { transition-delay: 0.22s; }
-  body.theme--04 .app-aside .option.theme .icon-container { transition-delay: 0.24s; }
-  body.theme--03 .app-aside .option.theme .icon-container { transition-delay: 0.26s; }
-  body.theme--02 .app-aside .option.theme .icon-container { transition-delay: 0.28s; }
-  body.theme--01 .app-aside .option.theme .icon-container { transition-delay: 0.30s; }
-  body.theme--00 .app-aside .option.theme .icon-container { transition-delay: 0.32s; }
+  body.theme--10 .app-aside .option.theme .icon-container { transition-delay: 0.00s; }
+  body.theme--09 .app-aside .option.theme .icon-container { transition-delay: 0.02s; }
+  body.theme--08 .app-aside .option.theme .icon-container { transition-delay: 0.04s; }
+  body.theme--07 .app-aside .option.theme .icon-container { transition-delay: 0.06s; }
+  body.theme--06 .app-aside .option.theme .icon-container { transition-delay: 0.08s; }
+  body.theme--05 .app-aside .option.theme .icon-container { transition-delay: 0.10s; }
+  body.theme--04 .app-aside .option.theme .icon-container { transition-delay: 0.12s; }
+  body.theme--03 .app-aside .option.theme .icon-container { transition-delay: 0.14s; }
+  body.theme--02 .app-aside .option.theme .icon-container { transition-delay: 0.16s; }
+  body.theme--01 .app-aside .option.theme .icon-container { transition-delay: 0.18s; }
+  body.theme--00 .app-aside .option.theme .icon-container { transition-delay: 0.20s; }
   
-  .app-aside .option.theme .dot:nth-child(17) { background-color: var(--color--foreground--100); transition-delay: 0.00s; }
-  .app-aside .option.theme .dot:nth-child(16) { background-color: var(--color--foreground--25);  transition-delay: 0.02s; }
-  .app-aside .option.theme .dot:nth-child(15) { background-color: var(--color--foreground--25);  transition-delay: 0.04s; }
-  .app-aside .option.theme .dot:nth-child(14) { background-color: var(--color--foreground--25);  transition-delay: 0.06s; }
-  .app-aside .option.theme .dot:nth-child(13) { background-color: var(--color--foreground--100); transition-delay: 0.08s; }
-  .app-aside .option.theme .dot:nth-child(12) { background-color: var(--color--foreground--25);  transition-delay: 0.10s; }
-  .app-aside .option.theme .dot:nth-child(11) { background-color: var(--color--foreground--25);  transition-delay: 0.12s; }
-  .app-aside .option.theme .dot:nth-child(10) { background-color: var(--color--foreground--25);  transition-delay: 0.14s; }
-  .app-aside .option.theme .dot:nth-child(9)  { background-color: var(--color--foreground--100); transition-delay: 0.16s; }
-  .app-aside .option.theme .dot:nth-child(8)  { background-color: var(--color--foreground--25);  transition-delay: 0.18s; }
-  .app-aside .option.theme .dot:nth-child(7)  { background-color: var(--color--foreground--25);  transition-delay: 0.20s; }
-  .app-aside .option.theme .dot:nth-child(6)  { background-color: var(--color--foreground--25);  transition-delay: 0.22s; }
-  .app-aside .option.theme .dot:nth-child(5)  { background-color: var(--color--foreground--100); transition-delay: 0.24s; }
-  .app-aside .option.theme .dot:nth-child(4)  { background-color: var(--color--foreground--25);  transition-delay: 0.26s; }
-  .app-aside .option.theme .dot:nth-child(3)  { background-color: var(--color--foreground--25);  transition-delay: 0.28s; }
-  .app-aside .option.theme .dot:nth-child(2)  { background-color: var(--color--foreground--25);  transition-delay: 0.30s; }
-  .app-aside .option.theme .dot:nth-child(1)  { background-color: var(--color--foreground--100); transition-delay: 0.32s; }
+  .app-aside .option.theme .dot:nth-child(11) { background-color: var(--color--foreground--25); transition-delay: 0.00s; }
+  .app-aside .option.theme .dot:nth-child(10) { background-color: var(--color--foreground--25); transition-delay: 0.02s; }
+  .app-aside .option.theme .dot:nth-child(9)  { background-color: var(--color--foreground--25); transition-delay: 0.04s; }
+  .app-aside .option.theme .dot:nth-child(8)  { background-color: var(--color--foreground--25); transition-delay: 0.06s; }
+  .app-aside .option.theme .dot:nth-child(7)  { background-color: var(--color--foreground--25); transition-delay: 0.08s; }
+  .app-aside .option.theme .dot:nth-child(6)  { background-color: var(--color--foreground--25); transition-delay: 0.10s; }
+  .app-aside .option.theme .dot:nth-child(5)  { background-color: var(--color--foreground--25); transition-delay: 0.12s; }
+  .app-aside .option.theme .dot:nth-child(4)  { background-color: var(--color--foreground--25); transition-delay: 0.14s; }
+  .app-aside .option.theme .dot:nth-child(3)  { background-color: var(--color--foreground--25); transition-delay: 0.16s; }
+  .app-aside .option.theme .dot:nth-child(2)  { background-color: var(--color--foreground--25); transition-delay: 0.18s; }
+  .app-aside .option.theme .dot:nth-child(1)  { background-color: var(--color--foreground--100); transition-delay: 0.20s; }
   
-  body.theme-slider--is--visible .app-aside .option.theme .dot:nth-child(17) { transition-delay: 0.32s; }
-  body.theme-slider--is--visible .app-aside .option.theme .dot:nth-child(16) { transition-delay: 0.30s; }
-  body.theme-slider--is--visible .app-aside .option.theme .dot:nth-child(15) { transition-delay: 0.28s; }
-  body.theme-slider--is--visible .app-aside .option.theme .dot:nth-child(14) { transition-delay: 0.26s; }
-  body.theme-slider--is--visible .app-aside .option.theme .dot:nth-child(13) { transition-delay: 0.24s; }
-  body.theme-slider--is--visible .app-aside .option.theme .dot:nth-child(12) { transition-delay: 0.22s; }
   body.theme-slider--is--visible .app-aside .option.theme .dot:nth-child(11) { transition-delay: 0.20s; }
   body.theme-slider--is--visible .app-aside .option.theme .dot:nth-child(10) { transition-delay: 0.18s; }
   body.theme-slider--is--visible .app-aside .option.theme .dot:nth-child(9)  { transition-delay: 0.16s; }
@@ -803,6 +921,9 @@
   .section.about .biography p {
     padding-top: 0;
   }
+  .section.about .biography p + p {
+    padding-top: 1.25em;
+  }
   .section.about p span.description,
   .section.about p span.copyright {
     font-size: 13px;
@@ -923,3 +1044,225 @@
     padding-bottom: 0.5em;
   }
   
+
+/* Code flavor
+----------------------------------------------------------------------------- */
+/* With a country theme the page borrows its paired programming language:
+   labels become comments and the intro is printed. scripts/i18n.js sets the
+   --code-* strings from scripts/locales.js. */
+body.has--code-flavor .app-nav .item::before,
+body.has--code-flavor .section.work .item .company::before,
+body.has--code-flavor .section.background .item .company::before,
+body.has--code-flavor .section.contact .status h3::before {
+  content: var(--code-comment-open);
+}
+body.has--code-flavor .app-nav .item::after,
+body.has--code-flavor .section.work .item .company::after,
+body.has--code-flavor .section.background .item .company::after,
+body.has--code-flavor .section.contact .status h3::after {
+  content: var(--code-comment-close);
+}
+body.has--code-flavor .app-nav .item::before,
+body.has--code-flavor .app-nav .item::after,
+body.has--code-flavor .section .item .company::before,
+body.has--code-flavor .section .item .company::after,
+body.has--code-flavor .section.contact .status h3::before,
+body.has--code-flavor .section.contact .status h3::after,
+body.has--code-flavor .section.intro .text::before,
+body.has--code-flavor .section.intro .text::after {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-feature-settings: normal;
+  color: var(--color--foreground--50);
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+body.has--code-flavor .section.intro .text::before,
+body.has--code-flavor .section.intro .text::after {
+  display: block;
+  font-size: var(--font--size-regular);
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+body.has--code-flavor .section.intro .text::before {
+  content: var(--code-print-open);
+  margin-bottom: 0.5em;
+}
+body.has--code-flavor .section.intro .text::after {
+  content: var(--code-print-close);
+  margin-top: 0.5em;
+}
+
+/* Theme slider flags: a preview beside the hovered position, and the active
+   country's flag on the slider button */
+.app-aside .option.theme .theme-flag-preview {
+  position: absolute;
+  left: 58px;
+  bottom: 12px;
+  padding: 6px;
+  border-radius: 8px;
+  background-color: var(--color--foreground--10);
+  opacity: 0;
+  transform: translateX(-6px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease, bottom 0.12s ease;
+}
+.app-aside .option.theme .theme-flag-preview.is--visible {
+  opacity: 1;
+  transform: none;
+}
+.app-aside .option.theme .theme-flag-preview .flag-icon {
+  display: block;
+  font-size: 20px;
+  border-radius: 2px;
+}
+.app-aside .option.theme .theme-flag-black {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: rgb(0 0 0);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.5);
+}
+.app-aside .option.theme .theme-current-flag {
+  display: none;
+  font-size: 18px;
+  border-radius: 2px;
+}
+body.has--code-flavor .app-aside .option.theme .theme-current-flag {
+  display: inline-block;
+}
+body.has--code-flavor .app-aside .option.theme .icon-container svg.icon.theme {
+  display: none;
+}
+
+/* Right-to-left (Arabic): the grid layout mirrors on its own; these keep the
+   status dot and code snippets on the correct side */
+[dir="rtl"] .look {
+  margin-left: 0;
+  margin-right: -32px;
+}
+/* The fixed menu moves to the right; below 1020px it becomes a full-screen
+   overlay (media-queries.css), which needs no change */
+@media all and (min-width: 1021px) {
+  [dir="rtl"] .app-nav {
+    left: auto;
+    right: var(--grid--app-margin);
+  }
+}
+/* The theme slider is a rotated control, so it keeps its left-to-right setup */
+[dir="rtl"] .app-aside {
+  direction: ltr;
+}
+[dir="rtl"] body.has--code-flavor .section.intro .text::before,
+[dir="rtl"] body.has--code-flavor .section.intro .text::after {
+  text-align: right;
+}
+[dir="rtl"] .section.work .item .stack {
+  direction: ltr;
+  justify-content: flex-end;
+}
+
+/* Collapsible project and job details
+----------------------------------------------------------------------------- */
+/* Descriptions stay folded so the lists scan quickly; hovering (or tapping,
+   or focusing) a title unfolds its description. The 0fr -> 1fr grid row
+   animates to the description's natural height. */
+.section .item .item-details {
+  grid-column: 1 / 2;
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  transition: grid-template-rows 0.45s cubic-bezier(0.33, 0, 0.2, 1);
+}
+.section .item .item-details > .description {
+  grid-column: 1 / -1;
+  min-height: 0;
+  padding-top: 0;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 0.3s ease, transform 0.45s cubic-bezier(0.33, 0, 0.2, 1);
+}
+/* Spacing above the text lives inside the folding box, so a closed item
+   takes no space at all */
+.section .item .item-details > .description::before {
+  content: '';
+  display: block;
+  height: 10px;
+}
+.section .item.is--open .item-details {
+  grid-template-rows: 1fr;
+}
+.section .item.is--open .item-details > .description {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.08s;
+}
+
+/* Hover cue: a circled plus after the title that turns into a cross when
+   open, plus a dashed underline and help cursor on hover */
+.section .item.has--details .role {
+  cursor: help;
+}
+.section .item.has--details .role::after {
+  content: '';
+  display: inline-block;
+  width: max(0.46em, 22px);
+  height: max(0.46em, 22px);
+  margin-inline-start: 0.26em;
+  vertical-align: 0.08em;
+  border: 2px solid var(--color--foreground--33);
+  border-radius: 50%;
+  color: var(--color--foreground--50);
+  /* plus sign drawn as two bars so it stays centred in any font */
+  background:
+    linear-gradient(currentColor, currentColor) center / 44% 2px no-repeat,
+    linear-gradient(currentColor, currentColor) center / 2px 44% no-repeat;
+  transition: transform 0.35s cubic-bezier(0.33, 0, 0.2, 1), border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+  animation: details-hint 2.4s ease-out infinite;
+}
+.section .item.has--details .role:hover::after,
+.section .item.has--details.is--open .role::after {
+  border-color: var(--color--foreground--100);
+  color: var(--color--foreground--100);
+  background-color: var(--color--foreground--10);
+}
+.section .item.has--details.is--open .role::after {
+  transform: rotate(45deg);
+}
+/* A soft ring pulses on the cue until the visitor opens their first item */
+@keyframes details-hint {
+  0%   { box-shadow: 0 0 0 0 var(--color--foreground--25); }
+  70%  { box-shadow: 0 0 0 0.22em var(--color--foreground--0); }
+  100% { box-shadow: 0 0 0 0 var(--color--foreground--0); }
+}
+body.has--opened-details .section .item.has--details .role::after {
+  animation: none;
+}
+.section .item.has--details .role:hover,
+.section .item.has--details .role:focus-visible {
+  text-decoration: underline dashed var(--color--foreground--25);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.12em;
+}
+.section .item.has--details .role:focus-visible {
+  outline: none;
+}
+
+@media all and (max-width: 760px) {
+  .section .item .item-details {
+    grid-column: 1 / 3;
+  }
+}
+@media all and (max-width: 500px) {
+  .section .item .item-details {
+    grid-column: 1 / -1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .section .item .item-details,
+  .section .item .item-details > .description,
+  .section .item.has--details .role::after {
+    transition: none;
+    animation: none;
+  }
+}

@@ -12,9 +12,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Github Mayur Veer — Full-Stack Developer</title>
+  <title>Mayur Veer — Software Engineer</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Mayur Veer, software engineer building backend, distributed and cloud systems. MS in Software Engineering Systems at Northeastern University, graduating December 2026.">
+  <meta property="og:title" content="Mayur Veer — Software Engineer">
+  <meta property="og:description" content="Backend, distributed systems and cloud infrastructure. MS Software Engineering Systems, Northeastern University.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://m-veer.github.io/">
 
   <link rel="shortcut icon" type="image/x-icon" href="assets/app/M.webp">
 
@@ -22,26 +27,25 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/font.css">
   <link rel="stylesheet" href="css/variables.css">
-  <link rel="stylesheet" href="css/color.css">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/color.css?v=3">
+  <link rel="stylesheet" href="css/style.css?v=8">
   <link rel="stylesheet" href="css/grid.css">
-  <link rel="stylesheet" href="css/media-queries.css">
-  <link rel="stylesheet" href="css/loading-screen.css">
+  <link rel="stylesheet" href="css/media-queries.css?v=2">
+  <link rel="stylesheet" href="css/loading-screen.css?v=9">
 
   <script type="module" src="config.js"></script>
   <script src="scripts/modernizer.js"></script>
   <script src="scripts/jquery-3.7.1.min.js"></script>
   <script src="scripts/jquery-easing-1.4.1.js"></script>
-  <script src="scripts/script.js"></script>
-  <script src="scripts/fetchIntroText.js"></script>
-  <script src="scripts/fetchBiographyText.js"></script>
+  <script src="scripts/locales.js?v=1"></script>
+  <script src="scripts/script.js?v=5"></script>
+  <script src="scripts/i18n.js?v=3"></script>
   <script type="module" src="./scripts/counter.js"></script>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icon-css@3.5.0/css/flag-icon.min.css">
 
-<body class="cover--is--visible is--loading theme--16">
+<body class="cover--is--visible is--loading theme--00">
   <div class="loading-screen">
     <div class="greeting-container">
       <div class="greeting-text"></div>
@@ -70,13 +74,13 @@
 
   <nav class="app-nav">
     <div class="content">
-      <div class="item intro is--active">Intro</div>
-      <div class="item work">Work</div>
-      <div class="item values">Values</div>
-      <div class="item background">Background</div>
-      <div class="item references">References</div>
-      <div class="item about">About</div>
-      <div class="item contact">Contact</div>
+      <div class="item intro is--active" data-i18n="nav.intro">Intro</div>
+      <div class="item work" data-i18n="nav.work">Work</div>
+      <div class="item values" data-i18n="nav.values">Values</div>
+      <div class="item background" data-i18n="nav.background">Background</div>
+      <div class="item references" data-i18n="nav.references">References</div>
+      <div class="item about" data-i18n="nav.about">About</div>
+      <div class="item contact" data-i18n="nav.contact">Contact</div>
     </div>
   </nav>
 
@@ -87,15 +91,21 @@
         <div class="gradient-mask left"></div>
         <div class="gradient-mask right is--visible"></div>
         <div class="options">
-        <div class="option anyone is--active">For anyone</div>
-          <div class="option recruiters">Recruiters</div>
-          <div class="option tech-leads">Technical Leads</div>
-          <div class="option backend-developers">Backend Developers</div>
-          <div class="option frontend-developers">Frontend Developers</div>
-          <div class="option software-architects">Software Architects</div>
+        <div class="option anyone is--active" data-i18n="intro.option.anyone">For anyone</div>
+          <div class="option recruiters" data-i18n="intro.option.recruiters">Recruiters</div>
+          <div class="option tech-leads" data-i18n="intro.option.tech-leads">Technical Leads</div>
+          <div class="option backend-developers" data-i18n="intro.option.backend-developers">Backend Developers</div>
+          <div class="option frontend-developers" data-i18n="intro.option.frontend-developers">Frontend Developers</div>
+          <div class="option software-architects" data-i18n="intro.option.software-architects">Software Architects</div>
         </div>
 
         <div class="texts" id="text-container">
+          <h1 class="text anyone is--visible" data-i18n-html="intro.text.anyone">Hello there, I'm a <br>developer, here to build software that <br>makes a difference.</h1>
+          <h1 class="text recruiters" data-i18n-html="intro.text.recruiters">I'm a software engineer with 3 years at EY and a recent internship at Cybersenz. Graduating from Northeastern in December 2026 and open to full-time roles.</h1>
+          <h1 class="text tech-leads" data-i18n-html="intro.text.tech-leads">I craft clean code and mentor junior developers. I thrive in complex environments and build robust solutions through technical expertise and creative problem-solving.</h1>
+          <h1 class="text backend-developers" data-i18n-html="intro.text.backend-developers">I'm a systems thinker who values correctness. I recently built a distributed job scheduler with Raft leader election and chaos-tested it for exactly-once delivery.</h1>
+          <h1 class="text frontend-developers" data-i18n-html="intro.text.frontend-developers">I bring end-to-end development skills from server to UI. I focus on creating responsive, accessible, and performant applications.</h1>
+          <h1 class="text software-architects" data-i18n-html="intro.text.software-architects">I'm highly technical and fluent across the stack. I've built <span>(<a href="https://m-veer.github.io/">this.site</a>)</span>.</h1>
         </div>
 
       </div>
@@ -104,76 +114,158 @@
     <section class="section work">
       <div class="content">
         <div class="item">
-          <h2 class="company">Solo</h2>
-          <h1 class="role">Data Processor</h1>
+          <h2 class="company" data-i18n="work.label.solo">Solo</h2>
+          <h1 class="role" data-i18n="work.self-hosted-paas-with.title">Self-Hosted PaaS with a Resilient Distributed Scheduler</h1>
           <p class="metadata">
-            <span class="location">Technology Stack: Python, FastAPI, GCP, Terraform, Docker, GitHub Actions</span>
+            <span class="stack" aria-label="Technology stack"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">PostgreSQL</span><span class="tag">Kubernetes</span><span class="tag">Kaniko</span><span class="tag">Terraform</span><span class="tag">Docker</span><span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">OpenTelemetry</span><span class="tag">GitHub Actions</span></span>
           </p>
-          <p class="description">Production-grade serverless data processing pipeline built with Python, FastAPI, and GCP services (Cloud Run, Pub/Sub, Firestore) handling 2,000+ requests per minute with 95% reliability under high concurrent load. Features event-driven architecture with fault-tolerant async processing, automatic crash recovery through Pub/Sub NACK mechanism, and exponential backoff retry strategy ensuring zero data loss. Implements multi-tenant security with Firestore sub-collection isolation, PII redaction, and comprehensive IAM controls. Fully automated deployment using Terraform Infrastructure as Code managing 15+ GCP resources and GitHub Actions CI/CD pipeline with 21 PyTest unit tests achieving 95% code coverage, format validation, and post-deployment integration tests. Achieves less than 100ms API response time with auto-scaling serverless architecture (0-10 instances), reducing infrastructure costs by 80% compared to traditional VM-based systems.</p>
+          <div class="item-details">
+            <p class="description" data-i18n="work.self-hosted-paas-with.desc">Heroku-style platform where a git push produces a live URL, powered by a distributed job scheduler written from scratch instead of Celery. The scheduler uses Raft leader election (with pre-vote and check-quorum) and Postgres fencing epochs to prevent split-brain, along with heartbeat leases, exponential-backoff retries, a dead-letter queue with compensation jobs, idempotent enqueue, and exactly-once side effects. Each deploy runs as a chained build → deploy → verify pipeline: images are built with Kaniko and the release is rolled back automatically on failure. The pipeline runs end to end locally, and a Kubernetes runtime that server-side-applies Deployments is written and validated for kind, EKS, and GKE. The FastAPI control plane and a Typer CLI handle releases, rollbacks, config, scaling, and logs. A custom chaos harness kills, freezes, and network-partitions the leader and workers under load, then checks invariants against the database. In a 180-second fault run at 25 jobs/s across 3 scheduler nodes and 3 workers, it lost 0 of 4,652 acknowledged jobs, recorded 0 exactly-once violations, kept 100% control-plane availability, and failed the leader over in about 1 second. The harness also found a real failover bug, which was fixed and covered by a regression test. The project also includes Terraform modules for AWS EKS and GCP GKE (passing terraform validate), Prometheus/Grafana dashboards with alert rules, end-to-end OpenTelemetry tracing, and a CI chaos gate in GitHub Actions.</p>
+          </div>
         </div>
 
         <div class="item">
-          <h2 class="company">Solo</h2>
+          <h2 class="company">Cybersenz</h2>
+          <h1 class="role" data-i18n="work.healthcare-operations-automation-platform.title">Healthcare Operations Automation Platform</h1>
+          <p class="metadata">
+            <span class="stack" aria-label="Technology stack"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Next.js</span><span class="tag">PostgreSQL</span><span class="tag">Redis</span><span class="tag">Celery</span><span class="tag">HashiCorp Vault</span><span class="tag">Docker</span><span class="tag">LLMs</span><span class="tag">Gmail API</span><span class="tag">DocuSeal</span></span>
+          </p>
+          <div class="item-details">
+            <p class="description" data-i18n="work.healthcare-operations-automation-platform.desc">Built backend services, AI agents, and dashboards that automate patient-intake and communication workflows for healthcare practices. Solely developed the patient-management backend, which handles patient registration in the practice's EHR (PrognoCIS), role-based access, e-signature forms via DocuSeal, Celery background jobs, and secrets management with HashiCorp Vault. Built an LLM-powered Gmail agent that reads medical-lien appointment emails, extracts patient and attorney details into structured fields, and replies automatically with pre-filled DocuSeal forms. Also developed a fax-processing pipeline (workers, health checks, Vault integration), a voicemail poller agent that sorts voicemails and sends them to email, and the operations dashboard (FastAPI, Next.js, PostgreSQL, Redis) with fax and voicemail tabs, dark mode, search, and pagination. All services were containerized with Docker for cloud deployment.</p>
+          </div>
+        </div>
+
+        <div class="item">
+          <h2 class="company" data-i18n="work.label.solo">Solo</h2>
+          <h1 class="role" data-i18n="work.leetcode-tracker.title">LeetCode Tracker</h1>
+          <p class="metadata">
+            <span class="stack" aria-label="Technology stack"><span class="tag">JavaScript</span><span class="tag">React</span><span class="tag">Vite</span><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">PostgreSQL</span><span class="tag">simple-git</span><span class="tag">OpenAI API</span></span>
+          </p>
+          <div class="item-details">
+            <p class="description" data-i18n="work.leetcode-tracker.desc">Full-stack interview-prep workspace for working through the Blind 75 and NeetCode 150 lists (156 problems) grouped by difficulty and category. Includes a per-problem code editor with support for Python, JavaScript, Go, Java, Rust, and C++, plus notes that save automatically. The Express backend saves each solution into a track-specific folder, then stages, commits, and pushes it to GitHub with simple-git, so every solved problem appears in the commit history. It also generates AI study notes through the OpenAI API and stores problem metadata in PostgreSQL, falling back to a local JSON store.</p>
+          </div>
+        </div>
+
+        <div class="item">
+          <h2 class="company" data-i18n="work.label.solo">Solo</h2>
+          <h1 class="role" data-i18n="work.local-file-explorer.title">Local File Explorer</h1>
+          <p class="metadata">
+            <span class="stack" aria-label="Technology stack"><span class="tag">TypeScript</span><span class="tag">Vue</span><span class="tag">Nuxt 3</span><span class="tag">Tailwind CSS</span><span class="tag">Go</span><span class="tag">Rust</span><span class="tag">Actix-web</span><span class="tag">Docker Compose</span></span>
+          </p>
+          <div class="item-details">
+            <p class="description" data-i18n="work.local-file-explorer.desc">Polyglot, microservice-based desktop file manager that runs in the browser and works with the real files on your machine. A Nuxt 3/Vue frontend with Tailwind CSS offers a sortable file view with type-based icons. A lightweight Go API gateway routes requests to a Rust (Actix-web + Tokio) service that performs fast file operations: browsing, multipart uploads, downloads, folder creation, and deletion. The whole stack is orchestrated with Docker Compose, which mounts the host file system into the containers.</p>
+          </div>
+        </div>
+
+        <div class="item">
+          <h2 class="company" data-i18n="work.label.solo">Solo</h2>
+          <h1 class="role" data-i18n="work.collaborative-code-review-platform.title">Collaborative Code Review Platform</h1>
+          <p class="metadata">
+            <span class="stack" aria-label="Technology stack"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">SCSS</span><span class="tag">PostgreSQL</span><span class="tag">Redis</span><span class="tag">Firestore</span><span class="tag">GCP</span><span class="tag">GKE</span><span class="tag">Terraform</span><span class="tag">Kubernetes</span><span class="tag">GitHub Actions</span></span>
+          </p>
+          <div class="item-details">
+            <p class="description" data-i18n="work.collaborative-code-review-platform.desc">Cloud-native platform for sharing code snippets, reviewing code, and tracking code-quality analytics. The FastAPI backend exposes REST APIs for authentication, snippets, reviews, and analytics with JWT authentication, plus WebSockets for live collaboration, backed by PostgreSQL (SQLAlchemy/Alembic), Redis caching, and Firestore. The React and TypeScript frontend includes a dashboard, a code editor view, and analytics pages. Infrastructure is defined in Terraform on GCP (GKE, Cloud SQL, Memorystore, Firestore, VPC, Artifact Registry, Secret Manager, IAM), and Kubernetes manifests with Horizontal Pod Autoscalers handle scaling. GitHub Actions CI/CD runs linting, PyTest suites, Terraform validation, image builds, deployments, and smoke tests, with Prometheus and Grafana for monitoring.</p>
+          </div>
+        </div>
+
+        <div class="item">
+          <h2 class="company" data-i18n="work.label.solo">Solo</h2>
+          <h1 class="role" data-i18n="work.data-processor.title">Data Processor</h1>
+          <p class="metadata">
+            <span class="stack" aria-label="Technology stack"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">GCP</span><span class="tag">Terraform</span><span class="tag">Docker</span><span class="tag">GitHub Actions</span></span>
+          </p>
+          <div class="item-details">
+            <p class="description" data-i18n="work.data-processor.desc">Production-grade serverless data processing pipeline built with Python, FastAPI, and GCP services (Cloud Run, Pub/Sub, Firestore), handling 2,133 requests per minute at 1,169ms p95 latency and processing 3M+ monthly requests at 60% lower cost than a VM-based alternative. Features event-driven architecture with fault-tolerant async processing, achieving a 95% success rate and zero message loss through Pub/Sub NACK-based retries, dead-letter queues, and exponential backoff. Implements multi-tenant security with Firestore sub-collection isolation and PII redaction, supporting 50+ concurrent tenants. Fully automated deployment using Terraform managing 15+ GCP resources and a GitHub Actions CI/CD pipeline running 21 PyTest suites at 85% code coverage, with auto-scaling serverless instances (0-10).</p>
+          </div>
+        </div>
+
+        <div class="item">
+          <h2 class="company" data-i18n="work.label.solo">Solo</h2>
           <!-- <h1 class="role">Sentiment Aura</h1> -->
-          <h1 class="role"><a href="https://sentiment-aura-778861305028.us-central1.run.app" target="_blank">Sentiment Aura</a></h1>
+          <h1 class="role"><a href="https://sentiment-aura-778861305028.us-central1.run.app" target="_blank" rel="noopener" data-i18n="work.sentiment-aura.title">Sentiment Aura</a></h1>
           <p class="metadata">
-            <span class="location">Technology Stack: Python, React, CSS, DeepGram API, Claude Console API</span>
+            <span class="stack" aria-label="Technology stack"><span class="tag">Python</span><span class="tag">React</span><span class="tag">CSS</span><span class="tag">DeepGram API</span><span class="tag">Claude Console API</span><span class="tag">Docker</span><span class="tag">GCP Cloud Run</span><span class="tag">Azure Container Apps</span><span class="tag">Terraform</span></span>
           </p>
-          <p class="description">Innovative full-stack web application that transforms spoken words into living, breathing visual art. By combining real-time speech recognition, AI-powered sentiment analysis, and dynamic weather visualization, the platform creates an immersive experience where the environment responds to the emotional tone of human speech.</p>
+          <div class="item-details">
+            <p class="description" data-i18n="work.sentiment-aura.desc">Innovative full-stack web application that transforms spoken words into living, breathing visual art. By combining real-time speech recognition, AI-powered sentiment analysis, and dynamic weather visualization, the platform creates an immersive experience where the environment responds to the emotional tone of human speech. The app is containerized with Docker and deployed on GCP Cloud Run. It was also deployed to Azure Container Apps through Azure Container Registry, with the infrastructure defined in Terraform and API keys injected as managed secrets.</p>
+          </div>
         </div>
 
         <div class="item">
-          <h2 class="company">Academic</h2>
-          <h1 class="role">End-to-End Cloud Integration & CI/CD Automation</h1>
+          <h2 class="company" data-i18n="work.label.internship">Internship</h2>
+          <h1 class="role" data-i18n="work.b2b-social-intelligence-ai.title">B2B Social Intelligence AI Engine</h1>
           <p class="metadata">
-            <span class="location">Technology Stack: Terraform, Shell, Packer, AWS, GCP, Python, PostgreSQL, GitHub Actions</span>
+            <span class="stack" aria-label="Technology stack"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Playwright</span><span class="tag">BeautifulSoup</span><span class="tag">spaCy</span><span class="tag">TextBlob</span><span class="tag">scikit-learn</span><span class="tag">Polars</span><span class="tag">SQLAlchemy</span><span class="tag">PostgreSQL</span></span>
           </p>
-          <p class="description">Developed a cloud-based Health API system utilizing Python and PostgreSQL to enhance data security and efficiency for healthcare applications, while also automating cloud infrastructure provisioning through Terraform configurations for subnets, which streamlined deployment on AWS and GCP. Additionally, improved CI/CD reliability by implementing GitHub Actions pipelines with YAML, automating API testing using shell scripts, validating Packer files, and provisioning cloud instances.</p>
+          <div class="item-details">
+            <p class="description" data-i18n="work.b2b-social-intelligence-ai.desc">Prototype AI engine that enriches B2B contact records with public LinkedIn activity and intent signals. Built an asynchronous, multi-worker Playwright scraper with proxy rotation, per-worker session and cookie persistence, stealth mode, and detection of authwalls and security checkpoints. It extracts profile details, contact information, and activity such as posts, comments, and reactions. A FastAPI service applies NLP to that activity: spaCy entity extraction, TextBlob sentiment, and TF-IDF with K-Means topic clustering. It classifies buying-intent signals, detects engagement with competitors, and scores each contact from 0 to 10 on engagement, intent, influence, fit, and timing, combined into a composite lead score. Results are stored in PostgreSQL and served through analytics endpoints for top prospects and competitor intelligence, with automated accuracy and edge-case test suites.</p>
+          </div>
         </div>
 
         <div class="item">
-          <h2 class="company">Solo</h2>
-          <h1 class="role">Netflix Clone</h1>
+          <h2 class="company" data-i18n="work.label.academic">Academic</h2>
+          <h1 class="role" data-i18n="work.end-to-end-cloud.title">End-to-End Cloud Integration & CI/CD Automation</h1>
           <p class="metadata">
-            <span class="location">Technology Stack: JavaScript, MongoDB, ExpressJS, ReactJS, NodeJS, HTML, CSS</span>
+            <span class="stack" aria-label="Technology stack"><span class="tag">Terraform</span><span class="tag">Shell</span><span class="tag">Packer</span><span class="tag">AWS</span><span class="tag">GCP</span><span class="tag">Python</span><span class="tag">PostgreSQL</span><span class="tag">GitHub Actions</span></span>
           </p>
-          <p class="description">Netflix Clone is a comprehensive entertainment platform built using a modern tech stack including React.js, Node.js, Express.js, MongoDB, and Tailwind CSS. It offers secure user authentication through JWT, ensuring a personalized experience. The responsive UI allows users to browse and search for movies, TV shows, and actors, watch trailers, and discover similar content. The app also features a search history function and an engaging landing page. With its combination of robust backend functionality and sleek frontend design, this application provides a seamless and feature-rich experience for movie and TV enthusiasts.</p>
+          <div class="item-details">
+            <p class="description" data-i18n="work.end-to-end-cloud.desc">Developed a cloud-based Health API system utilizing Python and PostgreSQL to enhance data security and efficiency for healthcare applications, while also automating cloud infrastructure provisioning through Terraform configurations for subnets, which streamlined deployment on AWS and GCP. Additionally, improved CI/CD reliability by implementing GitHub Actions pipelines with YAML, automating API testing using shell scripts, validating Packer files, and provisioning cloud instances.</p>
+          </div>
         </div>
 
         <div class="item">
-          <h2 class="company">Academic</h2>
-          <h1 class="role">Eventify</h1>
+          <h2 class="company" data-i18n="work.label.solo">Solo</h2>
+          <h1 class="role" data-i18n="work.netflix-clone.title">Netflix Clone</h1>
           <p class="metadata">
-            <span class="location">Technology Stack: TypeScript, MongoDB, Express, React, NodeJS, HTML, SCSS, Git</span>
+            <span class="stack" aria-label="Technology stack"><span class="tag">JavaScript</span><span class="tag">MongoDB</span><span class="tag">ExpressJS</span><span class="tag">ReactJS</span><span class="tag">NodeJS</span><span class="tag">HTML</span><span class="tag">CSS</span></span>
           </p>
-          <p class="description">Developed a full-stack event management platform, Eventify, featuring React Redux for efficient state management, PWA for offline functionality, and internationalization to support multiple languages, delivering an enhanced user experience. Integrated Stripe for secure payments, Google Maps for location-based event discovery, and a QR code scanner for streamlined check-ins, optimizing transaction efficiency and attendee management. Additionally, implemented real-time chat functionality using Fugu API to enable instant communication between event organizers and attendees, boosting user engagement and support.</p>
+          <div class="item-details">
+            <p class="description" data-i18n="work.netflix-clone.desc">Netflix Clone is a comprehensive entertainment platform built using a modern tech stack including React.js, Node.js, Express.js, MongoDB, and Tailwind CSS. It offers secure user authentication through JWT, ensuring a personalized experience. The responsive UI allows users to browse and search for movies, TV shows, and actors, watch trailers, and discover similar content. The app also features a search history function and an engaging landing page. With its combination of robust backend functionality and sleek frontend design, this application provides a seamless and feature-rich experience for movie and TV enthusiasts.</p>
+          </div>
         </div>
 
         <div class="item">
-          <h2 class="company">Solo</h2>
-          <h1 class="role">Comic Downloader</h1>
+          <h2 class="company" data-i18n="work.label.academic">Academic</h2>
+          <h1 class="role"><a href="https://github.com/m-veer/eventify" target="_blank" rel="noopener" data-i18n="work.eventify.title">Eventify</a></h1>
           <p class="metadata">
-            <span class="location">Technology Stack: JavaScript, React, FastAPI, Sqlite3, OS, requests, BeautifulSoup, Git</span>
+            <span class="stack" aria-label="Technology stack"><span class="tag">TypeScript</span><span class="tag">MongoDB</span><span class="tag">Express</span><span class="tag">React</span><span class="tag">NodeJS</span><span class="tag">HTML</span><span class="tag">SCSS</span><span class="tag">Git</span></span>
           </p>
-          <p class="description">Developed a high-performance comic retrieval application that allows users to fetch comic information via URL or text, select issues, and download images to a local directory or generate PDFs, processing over 10 comics in under a minute. The backend, built with Python and APIs and deployed using Uvicorn, seamlessly integrates with a ReactJS frontend, providing a smooth user experience for more than 100 daily active users. The application also features offline reading capabilities, storing comic names and page numbers to enable users to resume reading from their last position, enhancing overall user engagement and convenience.</p>
+          <div class="item-details">
+            <p class="description" data-i18n="work.eventify.desc">Developed a full-stack event management platform, Eventify, featuring React Redux for efficient state management, PWA for offline functionality, and internationalization to support multiple languages, delivering an enhanced user experience. Integrated Stripe for secure payments, Google Maps for location-based event discovery, and a QR code scanner for streamlined check-ins, optimizing transaction efficiency and attendee management. Additionally, implemented real-time chat functionality using Fugu API to enable instant communication between event organizers and attendees, boosting user engagement and support.</p>
+          </div>
         </div>
 
         <div class="item">
-          <h2 class="company">Academic</h2>
-          <h1 class="role">Stock Market Prediction</h1>
+          <h2 class="company" data-i18n="work.label.solo">Solo</h2>
+          <h1 class="role" data-i18n="work.comic-downloader.title">Comic Downloader</h1>
           <p class="metadata">
-            <span class="location">Technology Stack: Pandas, NumPy, Seaborn, Sklearn, TensorFlow, Dash, Word Cloud</span>
+            <span class="stack" aria-label="Technology stack"><span class="tag">JavaScript</span><span class="tag">React</span><span class="tag">FastAPI</span><span class="tag">Sqlite3</span><span class="tag">OS</span><span class="tag">requests</span><span class="tag">BeautifulSoup</span><span class="tag">Git</span></span>
           </p>
-          <p class="description">Developed a comprehensive machine learning project focusing on sentiment analysis and predictive modeling. The project analyzed 10,000 Amazon customer reviews to determine sentiment polarity, identifying the top 50 most-reviewed products and boosting user engagement by 20%. It also conducted sentiment analysis on 5,000 IMDB movie reviews, comparing various model performances with accuracy rates ranging from 78% to 85%. Additionally, the project utilized LSTM models to predict stock market movements based on sentiment analysis of 1 million news headlines and stock data, achieving a remarkable 90% predictive accuracy that can be applied to unseen tabular data.</p>
+          <div class="item-details">
+            <p class="description" data-i18n="work.comic-downloader.desc">Developed a high-performance comic retrieval application that allows users to fetch comic information via URL or text, select issues, and download images to a local directory or generate PDFs, processing over 10 comics in under a minute. The backend, built with Python and APIs and deployed using Uvicorn, seamlessly integrates with a ReactJS frontend, providing a smooth user experience for more than 100 daily active users. The application also features offline reading capabilities, storing comic names and page numbers to enable users to resume reading from their last position, enhancing overall user engagement and convenience.</p>
+          </div>
         </div>
 
         <div class="item">
-          <h2 class="company">Solo</h2>
-          <h1 class="role">Todo Application</h1>
+          <h2 class="company" data-i18n="work.label.academic">Academic</h2>
+          <h1 class="role" data-i18n="work.stock-market-prediction.title">Stock Market Prediction</h1>
           <p class="metadata">
-            <span class="location">Technology Stack: TypeScript, MongoDB, ExpressJS, ReactJS, NodeJS, ViteJS, TailWindCSS, Git</span>
+            <span class="stack" aria-label="Technology stack"><span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">Seaborn</span><span class="tag">Sklearn</span><span class="tag">TensorFlow</span><span class="tag">Dash</span><span class="tag">Word Cloud</span></span>
           </p>
-          <p class="description">Todo Application leverages a modern technology stack to deliver a seamless and efficient task management experience. Built with TypeScript for enhanced code reliability, it utilizes MongoDB for flexible data storage, ExpressJS and NodeJS for robust backend operations, and ReactJS with ViteJS for a responsive frontend. The application's sleek interface is styled using TailWindCSS, ensuring a visually appealing and user-friendly design. With Git for version control, this project showcases a comprehensive approach to full-stack development, offering users a powerful tool to organize, track, and complete their tasks with ease.</p>
+          <div class="item-details">
+            <p class="description" data-i18n="work.stock-market-prediction.desc">Developed a comprehensive machine learning project focusing on sentiment analysis and predictive modeling. The project analyzed 10,000 Amazon customer reviews to determine sentiment polarity, identifying the top 50 most-reviewed products and boosting user engagement by 20%. It also conducted sentiment analysis on 5,000 IMDB movie reviews, comparing various model performances with accuracy rates ranging from 78% to 85%. Additionally, the project utilized LSTM models to predict stock market movements based on sentiment analysis of 1 million news headlines and stock data, achieving a remarkable 90% predictive accuracy that can be applied to unseen tabular data.</p>
+          </div>
+        </div>
+
+        <div class="item">
+          <h2 class="company" data-i18n="work.label.solo">Solo</h2>
+          <h1 class="role" data-i18n="work.todo-application.title">Todo Application</h1>
+          <p class="metadata">
+            <span class="stack" aria-label="Technology stack"><span class="tag">TypeScript</span><span class="tag">MongoDB</span><span class="tag">ExpressJS</span><span class="tag">ReactJS</span><span class="tag">NodeJS</span><span class="tag">ViteJS</span><span class="tag">TailWindCSS</span><span class="tag">Git</span></span>
+          </p>
+          <div class="item-details">
+            <p class="description" data-i18n="work.todo-application.desc">Todo Application leverages a modern technology stack to deliver a seamless and efficient task management experience. Built with TypeScript for enhanced code reliability, it utilizes MongoDB for flexible data storage, ExpressJS and NodeJS for robust backend operations, and ReactJS with ViteJS for a responsive frontend. The application's sleek interface is styled using TailWindCSS, ensuring a visually appealing and user-friendly design. With Git for version control, this project showcases a comprehensive approach to full-stack development, offering users a powerful tool to organize, track, and complete their tasks with ease.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -190,13 +282,13 @@
           <p>These are my core design values, and I strive to imbue them in all of the work I do. I’ve always been making things and inventing ways to improve my surroundings. Solving a tangible need with a beautiful solution is a practice I love and resides in my core. Collaborating with a team to create a far better outcome than otherwise possible alone gives me energy. I like thinking big, working fast, yet carefully, holistically, long-term, sustainably, cross-functionally, zooming out on company strategy, and zooming in on details. I’m always improving, growing, and executing to the highest standard possible. All while achieving a larger mission, connecting my work to something deeper, tethered to improving the world, leaving it better than when&nbsp;I&nbsp;began.</p>
         </div> -->
         <div class="title">
-          <h1>Efficient</h1>
-          <h1>Innovative</h1>
-          <h1>Impactful</h1>
-          <h1>Scalable</h1>
+          <h1 data-i18n="values.title.1">Efficient</h1>
+          <h1 data-i18n="values.title.2">Innovative</h1>
+          <h1 data-i18n="values.title.3">Impactful</h1>
+          <h1 data-i18n="values.title.4">Scalable</h1>
         </div>
         <div class="description">
-          <p>These are my core engineering values, and I strive to embed them in all the solutions I create. I've always been passionate about building applications that simplify processes, automate tasks, and optimize performance. Solving complex problems with efficient, scalable solutions is what drives me. Collaborating with teams to deliver high-quality outcomes fuels my motivation. I enjoy architecting systems from the ground up, working across the full stack, balancing speed with precision, and continuously improving both my craft and the impact of my work. My goal is to create technology that not only empowers businesses but also makes a meaningful difference—leaving systems more optimized, users more satisfied, and processes more seamless than when I began.</p>
+          <p data-i18n="values.desc">These are my core engineering values, and I strive to embed them in all the solutions I create. I've always been passionate about building applications that simplify processes, automate tasks, and optimize performance. Solving complex problems with efficient, scalable solutions is what drives me. Collaborating with teams to deliver high-quality outcomes fuels my motivation. I enjoy architecting systems from the ground up, working across the full stack, balancing speed with precision, and continuously improving both my craft and the impact of my work. My goal is to create technology that not only empowers businesses but also makes a meaningful difference—leaving systems more optimized, users more satisfied, and processes more seamless than when I began.</p>
         </div>
       </div>
     </section>
@@ -205,7 +297,27 @@
       <div class="content">
 
         <div class="description">
-          <p>I studied software engineering, starting with core programming languages like C, C++, and Java, and gradually expanding my skills into full-stack development and automation. Leveraging my strong technical foundation and problem-solving mindset, I’ve established myself as a versatile software engineer who builds scalable applications with seamless user experiences. From designing data transformation applications that went global to developing automation tools that optimized business processes, I consistently deliver high-impact solutions. Throughout my 3+ years of professional experience, I’ve worked on desktop, web, and backend applications, mastering technologies like Python, React, FastAPI, and SQL. My passion for continuous learning, combined with a collaborative approach, enables me to thrive in dynamic environments and contribute effectively to both individual projects and cross-functional teams. Now, as I pursue my master's in software engineering, I’m focused on further honing my skills in full-stack development and cloud technologies, aiming to build innovative products that solve complex problems and enhance user experiences.</p>
+          <p data-i18n="background.intro">I studied software engineering, starting with core programming languages like C, C++, and Java, and gradually expanding my skills into full-stack development and automation. Leveraging my strong technical foundation and problem-solving mindset, I’ve established myself as a versatile software engineer who builds scalable applications with seamless user experiences. From designing data transformation applications that went global to developing automation tools that optimized business processes, I consistently deliver high-impact solutions. Throughout my 3+ years of professional experience, I’ve worked on desktop, web, and backend applications, mastering technologies like Python, React, FastAPI, and SQL. Most recently, at Cybersenz, I shipped production healthcare software and hardened its deployment on Azure. Now, as I complete my master's in software engineering, I’m focused on backend, distributed systems, and cloud infrastructure, building reliable products that solve complex problems.</p>
+        </div>
+
+        <div class="item">
+          <div class="logo">
+            <div class="content">
+              <svg class="icon cybersenz" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Cybersenz">
+                <circle cx="32" cy="32" r="32" fill="white" />
+                <text x="32" y="33" text-anchor="middle" dominant-baseline="central" font-family="system-ui, sans-serif" font-size="30" font-weight="700" fill="#111">C</text>
+              </svg>
+            </div>
+          </div>
+          <h2 class="company">Cybersenz LLC</h2>
+          <h1 class="role" data-i18n="background.cybersenz-llc.role">Software Engineering Intern</h1>
+          <p class="metadata">
+            <span class="time" data-i18n="background.cybersenz-llc.time">Jan 2026 – May 2026</span>
+            <span class="location" data-i18n="background.cybersenz-llc.location">Remote</span>
+          </p>
+          <div class="item-details">
+            <p class="description" data-i18n="background.cybersenz-llc.desc">Containerized a 6-service stack (FastAPI, React, email agent, Postgres, Redis, Vault) into a single-command Docker Compose deploy with in-container Alembic migrations and auto-restart on all 6 services for self-healing recovery. Hardened Azure production to zero secrets on disk by injecting Key Vault secrets via Managed Identity at startup, closing public access to Postgres and Vault, and terminating TLS at nginx. Shipped production clinic software with 58 JWT-secured FastAPI endpoints and React dashboards for FHIR-style patient registration, role-based access, and audit logging, integrated with PrognoCIS EHR and HMAC-signed webhooks.</p>
+          </div>
         </div>
 
         <div class="item">
@@ -218,12 +330,14 @@
             </div>
           </div>
           <h2 class="company">Ernst & Young</h2>
-          <h1 class="role">Team Lead - Full-Stack Developer</h1>
+          <h1 class="role" data-i18n="background.ernst-young.role">Team Lead – Software Engineer</h1>
           <p class="metadata">
-            <span class="time">2021-2024</span>
-            <span class="location">Mumbai, India</span>
+            <span class="time" data-i18n="background.ernst-young.time">Sep 2021 – Aug 2024</span>
+            <span class="location" data-i18n="background.ernst-young.location">Mumbai, India</span>
           </p>
-          <p class="description">Worked at Ernst & Young Global Consulting Services for 3 years, progressing from Data Analyst to Consultant, leading backend and full-stack development for data transformation, reconciliation, and document management applications using Python, FastAPI, React, Node, Angular, and SQL, optimizing performance and delivering client-specific solutions.</p>
+          <div class="item-details">
+            <p class="description" data-i18n="background.ernst-young.desc">Led a 4-person engineering team building data transformation, reconciliation, and document management applications with Python, FastAPI, React, Angular, and SQL. Accelerated invoice processing 17x through Pandas optimizations (25,000 invoices in 3 minutes), automated Arabic invoice generation for Formula 1 with 90% less manual effort, and cut React response times by 60% and Angular page load latency by 50%. Established code review standards that reduced production bugs by 40%.</p>
+          </div>
         </div>
 
         <div class="item">
@@ -236,12 +350,14 @@
             </div>
           </div>
           <h2 class="company">Zinc technologies</h2>
-          <h1 class="role">Python Developer Intern</h1>
+          <h1 class="role" data-i18n="background.zinc-technologies.role">Python Developer Intern</h1>
           <p class="metadata">
-            <span class="time">2021</span>
-            <span class="location">Mumbai, India</span>
+            <span class="time" data-i18n="background.zinc-technologies.time">2021</span>
+            <span class="location" data-i18n="background.zinc-technologies.location">Mumbai, India</span>
           </p>
-          <p class="description">Devised an RPA solution using BeautifulSoup with multithreading to crawl and extract data for 100 books in 2 minutes, storing information in a database.</p>
+          <div class="item-details">
+            <p class="description" data-i18n="background.zinc-technologies.desc">Devised an RPA solution using BeautifulSoup with multithreading to crawl and extract data for 100 books in 2 minutes, storing information in a database.</p>
+          </div>
         </div>
 
         <div class="item">
@@ -254,12 +370,14 @@
             </div>
           </div>
           <h2 class="company">The Sparks Foundation</h2>
-          <h1 class="role">Python Developer Intern</h1>
+          <h1 class="role" data-i18n="background.the-sparks-foundation.role">Python Developer Intern</h1>
           <p class="metadata">
-            <span class="time">2021</span>
-            <span class="location">Mumbai, India</span>
+            <span class="time" data-i18n="background.the-sparks-foundation.time">2021</span>
+            <span class="location" data-i18n="background.the-sparks-foundation.location">Mumbai, India</span>
           </p>
-          <p class="description">Completed supervised and unsupervised machine learning predictions, sports exploratory data analysis, and stock market prediction using numerical and textual analysis. Built a Dash-based UI application for IPL dataset analysis (3.7M data points), featuring 9 interactive dashboards, 12+ charts each, 20+ key statistics, search and sort functionalities, and real-time visualization customization — reducing data retrieval time by 50%.</p>
+          <div class="item-details">
+            <p class="description" data-i18n="background.the-sparks-foundation.desc">Completed supervised and unsupervised machine learning predictions, sports exploratory data analysis, and stock market prediction using numerical and textual analysis. Built a Dash-based UI application for IPL dataset analysis (3.7M data points), featuring 9 interactive dashboards, 12+ charts each, 20+ key statistics, search and sort functionalities, and real-time visualization customization — reducing data retrieval time by 50%.</p>
+          </div>
         </div>
 
         <div class="item">
@@ -272,12 +390,14 @@
             </div>
           </div>
           <h2 class="company">Cyberace Infovision Private Limited</h2>
-          <h1 class="role">Python Developer Intern</h1>
+          <h1 class="role" data-i18n="background.cyberace-infovision-private-limited.role">Python Developer Intern</h1>
           <p class="metadata">
-            <span class="time">2020</span>
-            <span class="location">Mumbai, India</span>
+            <span class="time" data-i18n="background.cyberace-infovision-private-limited.time">2020</span>
+            <span class="location" data-i18n="background.cyberace-infovision-private-limited.location">Mumbai, India</span>
           </p>
-          <p class="description">Built a Tkinter-based UI application for a property consulting firm to enhance data visualization and decision-making for 50+ properties. Optimized SQL queries to cut data retrieval time by 36.3%, dynamically processed CSV/XLSX files to calculate rent per area for 100+ listings, and boosted user engagement by 25% with interactive visualizations for in-depth property insights.</p>
+          <div class="item-details">
+            <p class="description" data-i18n="background.cyberace-infovision-private-limited.desc">Built a Tkinter-based UI application for a property consulting firm to enhance data visualization and decision-making for 50+ properties. Optimized SQL queries to cut data retrieval time by 36.3%, dynamically processed CSV/XLSX files to calculate rent per area for 100+ listings, and boosted user engagement by 25% with interactive visualizations for in-depth property insights.</p>
+          </div>
         </div>
 
       </div>
@@ -286,26 +406,26 @@
     <section class="section references">
       <div class="content">
         <div class="item">
-          <h2 class="quote"><span class="opening-quote-mark">“</span>Mayur possesses an exceptional ability to tackle complex data manipulation tasks and can quickly make sense of even the most challenging datasets.”</h2>
+          <h2 class="quote" data-i18n-html="references.1.quote"><span class="opening-quote-mark">“</span>Mayur possesses an exceptional ability to tackle complex data manipulation tasks and can quickly make sense of even the most challenging datasets.”</h2>
           <p>
             <span class="person"><a href="https://www.linkedin.com/in/mosamirkhatri/" target="_blank">MahmadSamir Khatri</a></span>
-            <span class="role">Tax Technology & Transformation | Ernst & Young</span>
+            <span class="role" data-i18n="references.1.role">Tax Technology & Transformation | Ernst & Young</span>
           </p>
         </div>
 
         <div class="item">
-          <h2 class="quote"><span class="opening-quote-mark">“</span>Mayur's technical expertise, particularly in MERN stack development, was evident throughout the project.”</h2>
+          <h2 class="quote" data-i18n-html="references.2.quote"><span class="opening-quote-mark">“</span>Mayur's technical expertise, particularly in MERN stack development, was evident throughout the project.”</h2>
           <p>
             <span class="person"><a href="https://www.linkedin.com/in/vyas-yash/" target="_blank">Yash Vyas</a></span>
-            <span class="role">Master's in Information Systems | Northeastern University</span>
+            <span class="role" data-i18n="references.2.role">Master's in Information Systems | Northeastern University</span>
           </p>
         </div>
 
         <div class="item">
-          <h2 class="quote"><span class="opening-quote-mark">“</span>Mayur is a star developer!”</h2>
+          <h2 class="quote" data-i18n-html="references.3.quote"><span class="opening-quote-mark">“</span>Mayur is a star developer!”</h2>
           <p>
             <span class="person"><a href="https://www.linkedin.com/in/tapan-bansal-a55b4752/" target="_blank">Tapan Bansal</a></span>
-            <span class="role">Senior Manager | Ernst & Young</span>
+            <span class="role" data-i18n="references.3.role">Senior Manager | Ernst & Young</span>
           </p>
         </div>
       </div>
@@ -315,72 +435,77 @@
       <div class="content">
 
         <div class="biography" id="biography-container">
-          <p></p>
+          <p data-i18n="about.bio.1">With 3+ years of experience across software engineering, data engineering, and automation at EY and Cybersenz, I've developed a versatile skill set with both breadth and depth.</p>
+          <p data-i18n="about.bio.2">I'm completing a Master of Science in Software Engineering Systems at Northeastern University, graduating in December 2026, and I'm looking for full-time software engineering roles starting January 2027.</p>
+          <p data-i18n="about.bio.3">Most recently, as a Software Engineering Intern at Cybersenz, I shipped production healthcare software with FastAPI and React, containerized its 6-service deployment, and hardened its Azure infrastructure with Key Vault, Managed Identity, and private networking.</p>
+          <p data-i18n="about.bio.4">Before that, I was a Team Lead – Software Engineer at EY, where I led the design, implementation, and testing of a customized ETL tool that went global across countries such as Poland, France, and Romania, serving clients like Boehringer Ingelheim and Roche.</p>
+          <p data-i18n="about.bio.5">I have hands-on experience in building desktop applications, web applications, and automation tools using technologies such as Python, React, Node.js, FastAPI, and Pandas. My key contributions include developing RPA solutions that reduced manual work by 85%, building machine learning models for stock market predictions, and creating dynamic data visualization applications with optimized query execution. I've also collaborated closely with cross-functional teams and mentored junior developers to enhance project efficiency and knowledge sharing. I'm passionate about backend and distributed systems, cloud infrastructure, and full-stack development, aiming to leverage my technical expertise to contribute to innovative projects. I currently live in Boston, enjoying exploring the city's vibrant tech community and outdoor activities in my free time.</p>
         </div>
 
         <div class="skills">
 
-          <h2>Skills</h2>
+          <h2 data-i18n="about.skills.title">Skills</h2>
 
-          <p>Languages: Python, Java, JavaScript, TypeScript, HTML, CSS, SCSS, SQL</p>
-          <p>Frameworks: Flask, FastAPI, Angular</p>
-          <p>Databases: MSSQL, PostgreSQL, SQLite</p>
-          <p>Tools: Power BI, Tableau</p>
-          <p>DevOps: CI/CD pipeline, Kubernetes, Docker, GitHub Actions, DigitalOcean, Terraform, Packer, AWS, GCP</p>
+          <p><span class="label" data-i18n="about.skills.languages">Languages</span> Python, Java, JavaScript, TypeScript, Go, Rust, SQL, Shell, HTML, CSS, SCSS, YAML, HCL</p>
+          <p><span class="label" data-i18n="about.skills.frameworks">Frameworks</span> FastAPI, Flask, React, Angular, Next.js, Node.js, Express</p>
+          <p><span class="label" data-i18n="about.skills.databases">Databases</span> PostgreSQL, MSSQL, SQLite, MongoDB, Redis, Firestore</p>
+          <p><span class="label" data-i18n="about.skills.cloud-and-devops">Cloud &amp; DevOps</span> AWS, GCP, Azure, Kubernetes, Docker, Terraform, Packer, GitHub Actions, Linux</p>
+          <p><span class="label" data-i18n="about.skills.observability">Observability</span> Prometheus, Grafana, OpenTelemetry</p>
+          <p><span class="label" data-i18n="about.skills.data-visualization">Data Visualization</span> Power BI, Tableau</p>
 
         </div>
 
         <div class="certifications">
 
-          <h2>Certificates</h2>
+          <h2 data-i18n="about.certs.title">Certificates</h2>
 
           <p>
-            <span class="title">Python Programming with Project Design<br></span>
-            <span class="description">Certificate of Course Completion<br></span>
-            <span class="description">17 July 2020<br></span>
-            <span class="description"><a href="assets/certificates/Python-Certificate-of-Completion.jpeg" target="_blank">View Certificate</a></span>
+            <span class="title" data-i18n-html="about.certs.1.title">Python Programming with Project Design<br></span>
+            <span class="description" data-i18n-html="about.certs.course">Certificate of Course Completion<br></span>
+            <span class="description" data-i18n-html="about.certs.1.date">17 July 2020<br></span>
+            <span class="description"><a href="assets/certificates/Python-Certificate-of-Completion.jpeg" target="_blank" data-i18n="about.certs.view">View Certificate</a></span>
           </p>
 
           <p>
-            <span class="title">Cyberace Infovision<br></span>
-            <span class="description">Certificate of Internship Completion<br></span>
-            <span class="description">22 July 2020<br></span>
-            <span class="description"><a href="assets/certificates/Cyberace-Certificate-of-Completion.jpeg" target="_blank">View Certificate</a></span>
+            <span class="title" data-i18n-html="about.certs.2.title">Cyberace Infovision<br></span>
+            <span class="description" data-i18n-html="about.certs.internship">Certificate of Internship Completion<br></span>
+            <span class="description" data-i18n-html="about.certs.2.date">22 July 2020<br></span>
+            <span class="description"><a href="assets/certificates/Cyberace-Certificate-of-Completion.jpeg" target="_blank" data-i18n="about.certs.view">View Certificate</a></span>
           </p>
 
           <p>
-            <span class="title">The Sparks Foundation<br></span>
-            <span class="description">Certificate of Internship Completion<br></span>
-            <span class="description">03 April 2021<br></span>
-            <span class="description"><a href="assets/certificates/The Sparks Foundation-Certificate-of-Completion.png" target="_blank">View Certificate</a></span>
+            <span class="title" data-i18n-html="about.certs.3.title">The Sparks Foundation<br></span>
+            <span class="description" data-i18n-html="about.certs.internship">Certificate of Internship Completion<br></span>
+            <span class="description" data-i18n-html="about.certs.3.date">03 April 2021<br></span>
+            <span class="description"><a href="assets/certificates/The Sparks Foundation-Certificate-of-Completion.png" target="_blank" data-i18n="about.certs.view">View Certificate</a></span>
           </p>
 
           <p>
-            <span class="title">Data Science<br></span>
-            <span class="description">Certificate of Course Completion<br></span>
-            <span class="description">28 March 2021<br></span>
-            <span class="description"><a href="assets/certificates/Data Science-Certificate-of-Completion.pdf" target="_blank">View Certificate</a></span>
+            <span class="title" data-i18n-html="about.certs.4.title">Data Science<br></span>
+            <span class="description" data-i18n-html="about.certs.course">Certificate of Course Completion<br></span>
+            <span class="description" data-i18n-html="about.certs.4.date">28 March 2021<br></span>
+            <span class="description"><a href="assets/certificates/Data Science-Certificate-of-Completion.pdf" target="_blank" data-i18n="about.certs.view">View Certificate</a></span>
           </p>
 
           <p>
-            <span class="title">Deep Learning<br></span>
-            <span class="description">Certificate of Course Completion<br></span>
-            <span class="description">23 May 2021<br></span>
-            <span class="description"><a href="assets/certificates/Deep Learning-Certificate-of-Completion.pdf" target="_blank">View Certificate</a></span>
+            <span class="title" data-i18n-html="about.certs.5.title">Deep Learning<br></span>
+            <span class="description" data-i18n-html="about.certs.course">Certificate of Course Completion<br></span>
+            <span class="description" data-i18n-html="about.certs.5.date">23 May 2021<br></span>
+            <span class="description"><a href="assets/certificates/Deep Learning-Certificate-of-Completion.pdf" target="_blank" data-i18n="about.certs.view">View Certificate</a></span>
           </p>
 
           <p>
-            <span class="title">R Programming<br></span>
-            <span class="description">Certificate of Course Completion<br></span>
-            <span class="description">01 June 2021<br></span>
-            <span class="description"><a href="assets/certificates/R Programming- Certificate-of-Completion.pdf" target="_blank">View Certificate</a></span>
+            <span class="title" data-i18n-html="about.certs.6.title">R Programming<br></span>
+            <span class="description" data-i18n-html="about.certs.course">Certificate of Course Completion<br></span>
+            <span class="description" data-i18n-html="about.certs.6.date">01 June 2021<br></span>
+            <span class="description"><a href="assets/certificates/R Programming- Certificate-of-Completion.pdf" target="_blank" data-i18n="about.certs.view">View Certificate</a></span>
           </p>
 
           <p>
-            <span class="title">Tableau<br></span>
-            <span class="description">Certificate of Course Completion<br></span>
-            <span class="description">19 August 2021<br></span>
-            <span class="description"><a href="assets/certificates/Tableau-Certificate-of-Completion.pdf" target="_blank">View Certificate</a></span>
+            <span class="title" data-i18n-html="about.certs.7.title">Tableau<br></span>
+            <span class="description" data-i18n-html="about.certs.course">Certificate of Course Completion<br></span>
+            <span class="description" data-i18n-html="about.certs.7.date">19 August 2021<br></span>
+            <span class="description"><a href="assets/certificates/Tableau-Certificate-of-Completion.pdf" target="_blank" data-i18n="about.certs.view">View Certificate</a></span>
           </p>
 
         </div>
@@ -401,17 +526,17 @@
             </div>
 
             <div class="status">
-              <h3>Open to Co-op and Internship opportunities</h3>
+              <h3 data-i18n="contact.status">Open to full-time Software Engineering roles from January 2027</h3>
             </div>
 
             <div class="interest">
-              <h2>Currently studying High Performance Computing for AI under Prof. Suhabe Bugrara and User Experience Design and Testing under Prof. Vishal Chawla at Northeastern University.</h2>
+              <h2 data-i18n="contact.interest">Completing my MS in Software Engineering Systems at Northeastern University, graduating December 2026.</h2>
             </div>
 
           </div>
 
           <div class="actions single-line">
-            <a href="assets/resume/Mayur-Veer-Resume.pdf" download class="item" title="Download Resume"><i class="fa fa-file-pdf-o"></i> Resume</a>
+            <a href="assets/resume/Mayur-Veer-Resume.pdf" download class="item" title="Download Resume"><i class="fa fa-file-pdf-o"></i> <span data-i18n="contact.action.resume">Resume</span></a>
             <a href="mailto:mayurveer.veer@gmail.com?subject=Enquiry%20from%20website" class="item" title="Email me"><i class="fa fa-envelope"></i> Gmail</a>
             <a href="https://www.linkedin.com/in/mayur-veer" target="_blank" class="item" title="LinkedIn Profile"><i class="fa fa-linkedin"></i> LinkedIn</a>
             <a href="https://github.com/m-veer/" target="_blank" class="item" title="GitHub Profile"><i class="fa fa-github"></i> GitHub</a>
@@ -440,6 +565,7 @@
       <div class="option theme">
 
         <div class="icon-container">
+          <span class="theme-current-flag flag-icon" aria-hidden="true"></span>
           <svg class="icon theme" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
             <path d="M17 2h-2v6h2V2zm-1 8c-3.31372 0-6 2.68628-6 6s2.68628 6 6 6 6-2.68628 6-6-2.68628-6-6-6zm0 10c-2.20911 0-4-1.79089-4-4s1.79089-4 4-4 4 1.79089 4 4-1.79089 4-4 4zm-1 10h2v-6h-2v6zM11.05029 9.63605 6.80762 5.39337 5.39337 6.80762l4.24268 4.24268 1.41424-1.41425zm9.89954 12.72796 4.24255 4.24261 1.41425-1.41425-4.24261-4.24268-1.41419 1.41432zM8 15H2v2h6v-2zm16 0v2h6v-2h-6zM5.39337 25.19238l1.41425 1.41425 4.24268-4.24261-1.41425-1.41431-4.24268 4.24267zM26.60663 6.80762l-1.41425-1.41425-4.24268 4.24268 1.41431 1.41412 4.24262-4.24255z"/>
           </svg>
@@ -458,14 +584,8 @@
             <div class="dot"></div>
             <div class="dot"></div>
             <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
           </div>
-          <input class="slider" type="range" min="0" max="16" step="1" value="0"/>
+          <input class="slider" type="range" min="0" max="10" step="1" value="0" aria-label="Color and language"/>
         </div>
 
       </div>
@@ -532,7 +652,7 @@
       <div class="line"></div>
     </div>
   </div>
-  <script src="scripts/loadingScreen.js"></script>
+  <script src="scripts/loadingScreen.js?v=7"></script>
 </body>
 
 </html>
